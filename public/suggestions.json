@@ -1,0 +1,13 @@
+{
+    "bored": [
+      { "activity": "bored journal",
+        "link": "/journalList"},
+      { "activity": "meditation"}
+    ],
+    "happy": [
+        {"activity": " happy journal",
+            "link": "/journalList"},
+        {"activity": "yoga"}
+    ]
+}
+  
