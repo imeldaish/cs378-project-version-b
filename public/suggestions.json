@@ -2,12 +2,14 @@
     "bored": [
       { "activity": "bored journal",
         "link": "/journalList"},
-      { "activity": "meditation"}
+      { "activity": "meditation",
+        "link": "/activities/meditation"}
     ],
     "happy": [
         {"activity": " happy journal",
             "link": "/journalList"},
-        {"activity": "yoga"}
+        {"activity": "yoga",
+        "link": "/activities/yoga"}
     ]
 }
   

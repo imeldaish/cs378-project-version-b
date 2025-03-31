@@ -6,7 +6,7 @@ const SuggestionPage = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const emotion = "bored"; // Hardcoded for testing
+  const emotion = "happy"; // Hardcoded for testing
 
   async function fetchSuggestion() {
     setLoading(true);
