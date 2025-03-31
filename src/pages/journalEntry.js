@@ -28,7 +28,10 @@ const JournalEntryPage = () => {
   };
 
   const handleGoBack = () => {
-    navigate('/journalList'); // Navigate to JournalList route
+    navigate('/journalList'); 
+  };
+  const goHome = () => {
+    navigate('/App.js'); 
   };
 
   const handleRemoveEntry = (index) => {
@@ -57,9 +60,11 @@ const JournalEntryPage = () => {
         />
         <button type="submit">Add Entry</button>
         <button type="button" onClick={handleClear}>Clear</button>
+        <button onClick={handleGoBack}>My Entries</button>
+        <button onClick={goHome}>Main Menu</button>
       </form>
 
-      <button onClick={handleGoBack}>Go Back</button>
+      
 
       <ul style={{ marginTop: '1rem' }}>
         {entries.map((entry, index) => (
