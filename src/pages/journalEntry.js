@@ -1,11 +1,67 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 
 const JournalEntryPage = () => {
-  return (
-    <div>
-      journal entry
-    </div>
-  )
-}
+  const [entries, setEntries] = useState([]);
+  const [input, setInput] = useState('');
 
-export default JournalEntryPage
+  useEffect(() => {
+    const storedEntries = JSON.parse(localStorage.getItem('journalEntries'));
+    if (storedEntries) {
+      setEntries(storedEntries);
+    }
+  }, []);
+
+  const updateLocalStorage = (items) => {
+    localStorage.setItem('journalEntries', JSON.stringify(items));
+  };
+
+  const handleAddEntry = (e) => {
+    e.preventDefault();
+    if (input.trim() === '') return;
+
+    const newEntries = [input.trim(), ...entries];
+    setEntries(newEntries);
+    updateLocalStorage(newEntries);
+    setInput('');
+  };
+
+  const handleRemoveEntry = (index) => {
+    const newEntries = [
+      ...entries.slice(0, index),
+      ...entries.slice(index + 1),
+    ];
+    setEntries(newEntries);
+    updateLocalStorage(newEntries);
+  };
+  const handleClear = () => {
+    setInput('');
+  };
+
+  return (
+    <div style={{ padding: '1rem' }}>
+      <h2>Journal Entry</h2>
+      <form onSubmit={handleAddEntry}>
+        <textarea
+          placeholder="Write your journal entry..."
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          rows={4}
+          style={{ width: '100%', marginBottom: '0.5rem' }}
+        />
+        <button type="submit">Add Entry</button>
+        <button onClick={handleClear}>Clear</button>
+      </form>
+
+      <ul style={{ marginTop: '1rem' }}>
+        {entries.map((entry, index) => (
+          <li key={index} style={{ marginBottom: '1rem' }}>
+            <div>{entry}</div>
+            <button onClick={() => handleRemoveEntry(index)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default JournalEntryPage;
