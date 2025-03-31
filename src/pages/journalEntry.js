@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const JournalEntryPage = () => {
   const [entries, setEntries] = useState([]);
   const [input, setInput] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedEntries = JSON.parse(localStorage.getItem('journalEntries'));
@@ -25,6 +27,13 @@ const JournalEntryPage = () => {
     setInput('');
   };
 
+  const handleGoBack = () => {
+    navigate('/journalList'); 
+  };
+  const goHome = () => {
+    navigate('/App.js'); 
+  };
+
   const handleRemoveEntry = (index) => {
     const newEntries = [
       ...entries.slice(0, index),
@@ -33,6 +42,7 @@ const JournalEntryPage = () => {
     setEntries(newEntries);
     updateLocalStorage(newEntries);
   };
+
   const handleClear = () => {
     setInput('');
   };
@@ -49,8 +59,12 @@ const JournalEntryPage = () => {
           style={{ width: '100%', marginBottom: '0.5rem' }}
         />
         <button type="submit">Add Entry</button>
-        <button onClick={handleClear}>Clear</button>
+        <button type="button" onClick={handleClear}>Clear</button>
+        <button onClick={handleGoBack}>My Entries</button>
+        <button onClick={goHome}>Main Menu</button>
       </form>
+
+      
 
       <ul style={{ marginTop: '1rem' }}>
         {entries.map((entry, index) => (
