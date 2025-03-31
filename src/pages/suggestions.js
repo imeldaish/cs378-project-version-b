@@ -6,7 +6,9 @@ const SuggestionPage = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const emotion = "bored"; // Hardcoded for testing
+  const emotion = "happy";
+  // const { state } = useLocation(); 
+  // const emotion = state?.emotion; 
 
   async function fetchSuggestion() {
     setLoading(true);
@@ -17,7 +19,6 @@ const SuggestionPage = () => {
       }
       const data = await response.json();
       setSuggestions(data);
-      setError(null);
     } catch (error) {
       setError(`suggestions for ${emotion} not found!`);
     } finally {
@@ -28,6 +29,12 @@ const SuggestionPage = () => {
   useEffect(() => {
     fetchSuggestion();
   }, []);
+
+  // useEffect(() => {
+  //   if (emotion) {
+  //     fetchSuggestion();
+  //   }
+  // }, [emotion]);
 
   return (
     <div>
@@ -43,9 +50,9 @@ const SuggestionPage = () => {
           <h3>Here are some suggestions based on your mood</h3>
           <p>Select an activity to continue</p>
           <ul>
-            {suggestions[emotion] ? (
+            {suggestions[emotion] && suggestions[emotion].length > 0? (
                 suggestions[emotion].map((item, index) => (
-                  <li key={item.index}>
+                  <li key={index}>
                     <Link to={item.link}>
                       <button>{item.activity}</button>
                     </Link>
