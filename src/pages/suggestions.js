@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; 
 
 const SuggestionPage = () => {
   const [suggestions, setSuggestions] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [selectedActivity, setSelectedActivity] = useState(null);
 
+
+  const navigate = useNavigate(); 
   const emotion = "happy";
   // const { state } = useLocation(); 
   // const emotion = state?.emotion; 
@@ -36,6 +40,18 @@ const SuggestionPage = () => {
   //   }
   // }, [emotion]);
 
+  const handleActivitySelect = (activity) => {
+    setSelectedActivity(activity); // Track the selected activity
+  };
+
+  const handleContinue = () => {
+    if (selectedActivity) {
+      navigate(selectedActivity.link);
+    } else {
+      alert("Please select an activity.");
+    }
+  };
+
   return (
     <div>
       <h1>You are feeling:</h1>
@@ -53,16 +69,21 @@ const SuggestionPage = () => {
             {suggestions[emotion] && suggestions[emotion].length > 0? (
                 suggestions[emotion].map((item, index) => (
                   <li key={index}>
-                    <Link to={item.link}>
-                      <button>{item.activity}</button>
-                    </Link>
-                  </li>
+                  <button onClick={() => handleActivitySelect(item)}>{item.activity}</button>
+                </li>
                 ))
               ) : (
                 <p>No suggestions available.</p>
               )}
 
           </ul>
+
+          {selectedActivity && (
+            <div>
+              <p>You have selected: {selectedActivity.activity}</p>
+              <button onClick={handleContinue}>Continue</button>
+            </div>
+          )}
         </div>
       )}
     </div>
