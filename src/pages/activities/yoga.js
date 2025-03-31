@@ -3,7 +3,7 @@ import React from 'react'
 const yoga = () => {
   return (
     <div>
-      yoga
+      yoga soundtracks
     </div>
   )
 }

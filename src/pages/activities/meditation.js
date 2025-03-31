@@ -3,7 +3,7 @@ import React from 'react'
 const meditation = () => {
   return (
     <div>
-      meditation
+      meditation videos
     </div>
   )
 }
