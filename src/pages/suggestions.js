@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom'; 
+
+import { useLocation, useNavigate } from 'react-router-dom'; 
 
 const SuggestionPage = () => {
   const [suggestions, setSuggestions] = useState({});
@@ -10,9 +10,8 @@ const SuggestionPage = () => {
 
 
   const navigate = useNavigate(); 
-  const emotion = "happy";
-  // const { state } = useLocation(); 
-  // const emotion = state?.emotion; 
+  const { state } = useLocation();
+  const emotion = state?.emotion || "bored";
 
   async function fetchSuggestion() {
     setLoading(true);
@@ -32,13 +31,7 @@ const SuggestionPage = () => {
 
   useEffect(() => {
     fetchSuggestion();
-  }, []);
-
-  // useEffect(() => {
-  //   if (emotion) {
-  //     fetchSuggestion();
-  //   }
-  // }, [emotion]);
+  }, [emotion]);
 
   const handleActivitySelect = (activity) => {
     setSelectedActivity(activity); // Track the selected activity
@@ -66,8 +59,8 @@ const SuggestionPage = () => {
           <h3>Here are some suggestions based on your mood</h3>
           <p>Select an activity to continue</p>
           <ul>
-            {suggestions[emotion] && suggestions[emotion].length > 0? (
-                suggestions[emotion].map((item, index) => (
+            {suggestions[emotion] && suggestions[emotion].suggestions.length > 0? (
+                suggestions[emotion].suggestions.map((item, index) => (
                   <li key={index}>
                   <button onClick={() => handleActivitySelect(item)}>{item.activity}</button>
                 </li>
