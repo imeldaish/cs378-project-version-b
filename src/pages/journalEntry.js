@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const JournalEntryPage = () => {
-  const [entries, setEntries] = useState([]);
+const JournalEntry = () => {
+  const [entries, setEntries] = useState({});
+  const getLocalDate = () => {
+    const today = new Date();
+    today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+    return today.toISOString().split('T')[0];
+  };
+  const [selectedDate] = useState(getLocalDate());
   const [input, setInput] = useState('');
   const navigate = useNavigate();
 
@@ -20,18 +26,21 @@ const JournalEntryPage = () => {
   const handleAddEntry = (e) => {
     e.preventDefault();
     if (input.trim() === '') return;
-
-    const newEntries = [input.trim(), ...entries];
+    const newEntries = {
+      ...entries,
+      [selectedDate]: [...(entries[selectedDate] || []), input.trim()]
+    };
     setEntries(newEntries);
-    updateLocalStorage(newEntries);
+    localStorage.setItem('journalEntries', JSON.stringify(newEntries));
     setInput('');
   };
 
+
   const handleGoBack = () => {
-    navigate('/journalList'); 
+    navigate('/journalList');
   };
   const goHome = () => {
-    navigate('/App.js'); 
+    navigate('/App.js');
   };
 
   const handleRemoveEntry = (index) => {
@@ -64,10 +73,10 @@ const JournalEntryPage = () => {
         <button onClick={goHome}>Main Menu</button>
       </form>
 
-      
+
 
       <ul style={{ marginTop: '1rem' }}>
-        {entries.map((entry, index) => (
+        {(entries[selectedDate] || []).map((entry, index) => (
           <li key={index} style={{ marginBottom: '1rem' }}>
             <div>{entry}</div>
             <button onClick={() => handleRemoveEntry(index)}>Delete</button>
@@ -78,4 +87,4 @@ const JournalEntryPage = () => {
   );
 };
 
-export default JournalEntryPage;
+export default JournalEntry;
