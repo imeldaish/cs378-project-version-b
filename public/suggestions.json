@@ -1,15 +1,58 @@
 {
-    "bored": [
-      { "activity": "bored journal",
-        "link": "/journalList"},
-      { "activity": "meditation",
-        "link": "/activities/meditation"}
-    ],
-    "happy": [
-        {"activity": " happy journal",
-            "link": "/journalList"},
-        {"activity": "yoga",
-        "link": "/activities/yoga"}
-    ]
+  "bored": {
+      "emoji": "😑",
+      "suggestions": [
+          { "activity": "bored journal", "link": "/journalList" },
+          { "activity": "meditation", "link": "/activities/meditation" }
+      ]
+  },
+  "happy": {
+      "emoji": "😊",
+      "suggestions": [
+          { "activity": "happy journal", "link": "/journalList" },
+          { "activity": "yoga", "link": "/activities/yoga" }
+      ]
+  },
+  "angry": {
+      "emoji": "😡",
+      "suggestions": [
+          { "activity": "deep breathing", "link": "/activities/breathing" },
+          { "activity": "boxing workout", "link": "/activities/boxing" }
+      ]
+  },
+  "sad": {
+      "emoji": "😢",
+      "suggestions": [
+          { "activity": "write in a gratitude journal", "link": "/journalList" },
+          { "activity": "listen to calming music", "link": "/activities/music" }
+      ]
+  },
+  "anxious": {
+      "emoji": "😰",
+      "suggestions": [
+          { "activity": "guided meditation", "link": "/activities/meditation" },
+          { "activity": "5-4-3-2-1 grounding exercise", "link": "/activities/grounding" }
+      ]
+  },
+  "excited": {
+      "emoji": "🤩",
+      "suggestions": [
+          { "activity": "celebrate with a journal entry", "link": "/journalList" },
+          { "activity": "share your excitement with a friend", "link": "/activities/social" }
+      ]
+  },
+  "stressed": {
+      "emoji": "😖",
+      "suggestions": [
+          { "activity": "progressive muscle relaxation", "link": "/activities/relaxation" },
+          { "activity": "take a short walk", "link": "/activities/walking" }
+      ]
+  },
+  "guilty": {
+      "emoji": "😔",
+      "suggestions": [
+          { "activity": "self-reflection journal", "link": "/journalList" },
+          { "activity": "practice self-compassion", "link": "/activities/selfcare" }
+      ]
+  }
 }
-  
