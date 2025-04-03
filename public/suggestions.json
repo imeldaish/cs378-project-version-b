@@ -9,7 +9,7 @@
   "happy": {
       "emoji": "😊",
       "suggestions": [
-          { "activity": "happy journal", "link": "/journalList" },
+          { "activity": "journal", "link": "/journalList" },
           { "activity": "yoga", "link": "/activities/yoga" }
       ]
   },
@@ -23,7 +23,7 @@
   "sad": {
       "emoji": "😢",
       "suggestions": [
-          { "activity": "write in a gratitude journal", "link": "/journalList" },
+          { "activity": "journal", "link": "/journalList" },
           { "activity": "listen to calming music", "link": "/activities/music" }
       ]
   },
@@ -37,7 +37,7 @@
   "excited": {
       "emoji": "🤩",
       "suggestions": [
-          { "activity": "celebrate with a journal entry", "link": "/journalList" },
+          { "activity": "journal", "link": "/journalList" },
           { "activity": "share your excitement with a friend", "link": "/activities/social" }
       ]
   },
@@ -51,7 +51,7 @@
   "guilty": {
       "emoji": "😔",
       "suggestions": [
-          { "activity": "self-reflection journal", "link": "/journalList" },
+          { "activity": "journal", "link": "/journalList" },
           { "activity": "practice self-compassion", "link": "/activities/selfcare" }
       ]
   }
