@@ -2,7 +2,7 @@
   "bored": {
       "emoji": "😑",
       "suggestions": [
-          { "activity": "bored journal", "link": "/journalList" },
+          { "activity": "journal", "link": "/journalList" },
           { "activity": "meditation", "link": "/activities/meditation" }
       ]
   },
