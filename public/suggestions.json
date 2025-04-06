@@ -3,7 +3,14 @@
       "emoji": "😑",
       "suggestions": [
           { "activity": "journal", "link": "/journalList" },
-          { "activity": "meditation", "link": "/activities/meditation" }
+          { "activity": "meditation", 
+            "link": "/activities/meditation",
+            "playlist": [
+                    {"title":"relaxation", "source": "/media/meditation/meditation-relaxing-music-background-320405.mp3"},
+                    {"title": "waterfall", "source": "/media/meditation/the-waterfall-meditation-271046.mp3"},
+                    {"title": "calming", "source": "/media/meditation/calm-soul-meditation-247330.mp3"},
+                    {"title": "tranquil", "source": "media/meditation/piano-dreamcloud-meditation-179215.mp3"}
+        ]}
       ]
   },
   "happy": {
