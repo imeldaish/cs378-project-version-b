@@ -13,7 +13,6 @@ function App() {
   return (
     <div className='App'>
       <Router>
-        <Navbar/>
         <Routes>
           <Route exact path="/" element={<MoodPage />}></Route>
           <Route path="/suggestions" element={<SuggestionPage />}></Route>
@@ -21,6 +20,7 @@ function App() {
           <Route path="/journalEntry" element={<JournalEntryPage />}></Route>
           <Route path="/activities/:activityName" element={<ActivityPage />} />
         </Routes>
+        <Navbar/>
       </Router>
     </div>
   );

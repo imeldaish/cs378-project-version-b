@@ -1,3 +1,76 @@
 .App {
   text-align: center;
+  background-color: #CAE8A2;
+  min-height: 100vh;
+  font-family: "Lexend", sans-serif;
+}
+
+/***********************load bar************************************/
+.loadbar-container{
+  background-color: white;
+  height: 100px;
+  align-items: center;
+  justify-content: center;
+  border-radius:0 0 20px 20px;
+}
+
+.loadbar-empty-bar{
+  position: relative;
+  width: 90%;
+  height: 30px;
+  background-color: #D9D9D9;
+  border-radius: 50px;
+  overflow: 'hidden';
+  margin: 0 auto;
+  top: 55px;
+}
+
+.loadbar-fill-bar{
+  width: 0%;
+  height: 100%;
+  background-color: #49BA29;
+  transition: 'width 0.3s ease-in-out';
+  border-radius: 50px;
+}
+
+/***********************Suggestions************************************/
+
+.suggestion-page{
+  min-height: 100vh;
+}
+
+.header-container{
+  background-color: white;
+  width: 70vw;
+  margin: 20px auto;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.suggestion-list{
+  list-style-type:none;
+  padding:0px;
+  margin:0px;
+}
+
+.suggestion-button {
+  border-radius: 50px;
+  background-color: white;
+  margin: 10px;
+  font-size: larger;
+  padding: 10px 15px;
+  border: solid #CAE8A2 5px;;
+  transition: border 0.2s ease;
+}
+
+.suggestion-button.active {
+  border: solid #49BA29 5px;
+}
+
+.next-button{
+  background-color: black;
+  color: white;
+  padding: 5px 10px;
+  font-size: medium;
+  border-radius: 50px;
 }

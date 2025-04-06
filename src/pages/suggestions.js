@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-
 import { useLocation, useNavigate } from 'react-router-dom'; 
+import LoadBar from '../components/loadbar';
 
 const SuggestionPage = () => {
   const [suggestions, setSuggestions] = useState({});
@@ -11,7 +11,15 @@ const SuggestionPage = () => {
 
   const navigate = useNavigate(); 
   const { state } = useLocation();
-  const emotion = state?.emotion || "bored";
+  // Save emotion to sessionStorage if passed via state
+  useEffect(() => {
+    if (state?.emotion) {
+      sessionStorage.setItem("emotion", state.emotion);
+    }
+  }, [state]);
+
+  const emotion = state?.emotion || sessionStorage.getItem("emotion") || "bored";
+
 
   async function fetchSuggestion() {
     setLoading(true);
@@ -46,9 +54,14 @@ const SuggestionPage = () => {
   };
 
   return (
-    <div>
-      <h1>You are feeling:</h1>
-      <h1>{emotion}</h1>
+    <div className='suggestion-page'>
+      <LoadBar percentage={50}/>
+
+      <div className='header-container'>
+        <h1 className='mt-2 fw-semibold'>You are feeling:</h1>
+        <h1 className='fw-bold' style={{ color: '#49BA29' }}>{emotion.toUpperCase()}</h1>
+      </div>
+      
 
       {loading ? (
         <p>Loading...</p>
@@ -58,12 +71,15 @@ const SuggestionPage = () => {
         <div>
           <h3>Here are some suggestions based on your mood</h3>
           <p>Select an activity to continue</p>
-          <ul>
+          <ul className='suggestion-list'>
             {suggestions[emotion] && suggestions[emotion].suggestions.length > 0? (
                 suggestions[emotion].suggestions.map((item, index) => (
                   <li key={index}>
-                  <button onClick={() => handleActivitySelect(item)}>{item.activity}</button>
-                </li>
+                    <button className={`suggestion-button ${selectedActivity?.activity === item.activity ? 'active' : ''}`}
+                      onClick={() => handleActivitySelect(item)}>
+                      {item.activity.charAt(0).toUpperCase() + item.activity.slice(1)}
+                    </button>
+                  </li>
                 ))
               ) : (
                 <p>No suggestions available.</p>
@@ -74,7 +90,7 @@ const SuggestionPage = () => {
           {selectedActivity && (
             <div>
               <p>You have selected: {selectedActivity.activity}</p>
-              <button onClick={handleContinue}>Continue</button>
+              <button className="next-button" onClick={handleContinue}>CONTINUE</button>
             </div>
           )}
         </div>
