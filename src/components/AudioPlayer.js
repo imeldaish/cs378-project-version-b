@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Play, Pause } from 'lucide-react';
+
 
 const CustomAudioPlayer = ({ src, title }) => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -60,7 +62,7 @@ const CustomAudioPlayer = ({ src, title }) => {
 
       <div className="audio-controls">
         <button onClick={togglePlay} className="play-button">
-        {isPlaying ? <span dangerouslySetInnerHTML={{ __html: "&#x23F8;" }} /> : <span dangerouslySetInnerHTML={{ __html: "&#x25B6;" }} />}
+        {isPlaying ? <Pause size={24} /> : <Play size={24} />}
         </button>
 
         <div className="progress-bar" onClick={handleSeek}>

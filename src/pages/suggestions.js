@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom'; 
 import LoadBar from '../components/loadbar.js';
+import { ArrowBigLeft } from 'lucide-react';
 
 const SuggestionPage = () => {
   const [suggestions, setSuggestions] = useState({});
@@ -94,6 +95,10 @@ const SuggestionPage = () => {
           )}
         </div>
       )}
+      <button className="back-button mt-2" onClick={() => navigate("/", { state: { emotion } })}>
+      <ArrowBigLeft size={30}/>
+      </button>
+
     </div>
   );
 };
