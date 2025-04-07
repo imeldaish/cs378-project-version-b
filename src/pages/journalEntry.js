@@ -15,9 +15,10 @@ const JournalEntry = () => {
   const [emojiMap, setEmojiMap] = useState({});
 
   useEffect(() => {
-    fetch('/cs378-project/suggestions.json')
+    fetch('/suggestions.json')
       .then((res) => res.json())
       .then((data) => {
+        console.log('Loaded emoji map:', data);
         setEmojiMap(data);
       })
       .catch((err) => console.error('Failed to load emoji map:', err));
@@ -58,7 +59,7 @@ const JournalEntry = () => {
     navigate('/journalList');
   };
   const goHome = () => {
-    navigate('/index.js');
+    navigate('/');
   };
 
   const handleClear = () => {
@@ -83,16 +84,19 @@ const JournalEntry = () => {
       </form>
 
       <ul style={{ marginTop: '1rem' }}>
-        {(entries[selectedDate] || []).map((entry, index) => (
-          <li key={index} style={{ marginBottom: '1rem' }}>
-            <div>
-              <span style={{ fontSize: '1.5rem', marginRight: '0.5rem' }}>
-                {emojiMap[entry.emotion]?.emoji || '😐'}
-              </span>
-              {entry.text}
-            </div>
-          </li>
-        ))}
+      {(entries[selectedDate] || []).map((entry, index) => {
+  console.log('Rendering entry:', entry);
+  return (
+    <li key={index} style={{ marginBottom: '1rem' }}>
+      <div>
+        <span style={{ fontSize: '1.5rem', marginRight: '0.5rem' }}>
+          {emojiMap[entry.emotion]?.emoji || '😐'}
+        </span>
+        {entry.text}
+      </div>
+    </li>
+  );
+})}
       </ul>
     </div>
   );
