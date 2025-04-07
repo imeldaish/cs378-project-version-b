@@ -101,7 +101,7 @@ const JournalList = () => {
     <div>
       <h1 className="journal-header">Journal</h1>
       <EntryButton />
-      <div class="calendar d-flex justify-content-center">
+      <div className="calendar d-flex justify-content-center">
         <JournalCalendar setSelectedDate={setSelectedDate} />
       </div>
       <h3 className="previous-entries-title">Previous Entries</h3>
