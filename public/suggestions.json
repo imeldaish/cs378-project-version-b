@@ -6,11 +6,11 @@
           { "activity": "meditation", 
             "link": "/activities/meditation",
             "playlist": [
-                    {"title":"relaxation", "source": "/media/meditation/meditation-relaxing-music-background-320405.mp3"},
-                    {"title": "waterfall", "source": "/media/meditation/the-waterfall-meditation-271046.mp3"},
-                    {"title": "calming", "source": "/media/meditation/calm-soul-meditation-247330.mp3"},
-                    {"title": "tranquil", "source": "media/meditation/piano-dreamcloud-meditation-179215.mp3"}
-        ]}
+                {"title":"meditation", "source": "/media/meditation/meditation-relaxing-music-background-320405.mp3"},
+                {"title": "waterfall", "source": "/media/meditation/the-waterfall-meditation-271046.mp3"},
+                {"title": "calm soul", "source": "/media/meditation/calm-soul-meditation-247330.mp3"},
+                {"title": "tranquil", "source": "media/meditation/piano-dreamcloud-meditation-179215.mp3"}]
+            }
       ]
   },
   "happy": {
@@ -31,7 +31,14 @@
       "emoji": "😢",
       "suggestions": [
           { "activity": "journal", "link": "/journalList" },
-          { "activity": "listen to calming music", "link": "/activities/music" }
+          { "activity": "listen to calming music", 
+            "link": "/activities/music",
+            "playlist": [
+                    {"title":"water dance", "source": "/media/calm-music/please-calm-my-mind-125566.mp3"},
+                    {"title": "piano", "source": "/media/calm-music/calm-classical-piano-291012.mp3"},
+                    {"title": "fantasy", "source": "/media/calm-music/calm-jazz-220610.mp3"},
+                    {"title": "lofi", "source": "media/calm-music/lofi-study-calm-peaceful-chill-hop-112191.mp3"}]
+            }
       ]
   },
   "anxious": {
