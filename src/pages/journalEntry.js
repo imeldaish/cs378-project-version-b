@@ -76,10 +76,10 @@ const JournalEntry = () => {
           rows={4}
           style={{ width: '100%', marginBottom: '0.5rem' }}
         />
-        <button type="submit">Add Entry</button>
-        <button type="button" onClick={handleClear}>Clear</button>
-        <button onClick={handleGoBack}>My Entries</button>
-        <button onClick={goHome}>Main Menu</button>
+        <button type="submit" class="button">Add Entry</button>
+        <button type="button" class="button" onClick={handleClear}>Clear</button>
+        <button class="button" onClick={handleGoBack}>My Entries</button>
+        <button class="button" onClick={goHome}>Main Menu</button>
       </form>
 
       <ul style={{ marginTop: '1rem' }}>

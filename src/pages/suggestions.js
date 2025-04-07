@@ -56,7 +56,11 @@ const SuggestionPage = () => {
   return (
     <div className='suggestion-page'>
       <LoadBar percentage={50}/>
-
+      <div className="back-button-container">
+        <button className="back-button mt-2" onClick={() => navigate("/", { state: { emotion } })}>
+          <ArrowBigLeft size={30}/>
+        </button>
+      </div>
       <div className='header-container'>
         <h1 className='mt-2 fw-semibold'>You are feeling:</h1>
         <h1 className='fw-bold' style={{ color: '#49BA29' }}>{emotion.toUpperCase()}</h1>
@@ -95,10 +99,6 @@ const SuggestionPage = () => {
           )}
         </div>
       )}
-      <button className="back-button mt-2" onClick={() => navigate("/", { state: { emotion } })}>
-      <ArrowBigLeft size={30}/>
-      </button>
-
     </div>
   );
 };
