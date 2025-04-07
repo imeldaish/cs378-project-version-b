@@ -58,9 +58,10 @@ const JournalList = () => {
   const [emojiMap, setEmojiMap] = useState({});
 
   useEffect(() => {
-    fetch('/cs378-project/suggestions.json')
+    fetch('/suggestions.json')
       .then((res) => res.json())
       .then((data) => {
+        console.log('Loaded emoji map:', data); // Check this!
         setEmojiMap(data);
       })
       .catch((err) => console.error('Failed to load emoji map:', err));
@@ -115,7 +116,7 @@ const JournalList = () => {
                   key={index}
                   entry={entry}
                   index={index}
-                  emoji={emojiMap[entry.emotion]?.emoji || '😐'}
+                  emoji = {emojiMap[entry.emotion]?.emoji || '😐'}
                   onDelete={handleRemoveEntry}
                 />
               )
