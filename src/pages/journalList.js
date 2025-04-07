@@ -23,7 +23,7 @@ const BackButton = () => {
   );
 };
 
-const JournalListItem = ({ entry, index, onDelete, emoji }) => {
+const JournalListItem = ({ entry, entryKey, onDelete, emojiUrl }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -32,7 +32,7 @@ const JournalListItem = ({ entry, index, onDelete, emoji }) => {
         style={{ cursor: 'pointer' }}
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        <span style={{ fontSize: '1.5rem', marginRight: '0.5rem' }}>{emoji}</span>
+        <img src={emojiUrl} alt="emotion" style={{ width: '24px', height: '24px', marginRight: '0.5rem' }} />
         {entry.text}
       </div>
 
@@ -41,7 +41,7 @@ const JournalListItem = ({ entry, index, onDelete, emoji }) => {
           <button className="btn btn-sm btn-secondary">Edit</button>
           <button
             className="btn btn-sm btn-danger"
-            onClick={() => onDelete(index)}
+            onClick={() => onDelete(entryKey)}
           >
             Delete
           </button>
@@ -55,17 +55,6 @@ const JournalList = () => {
 
   const [entries, setEntries] = useState({});
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
-  const [emojiMap, setEmojiMap] = useState({});
-
-  useEffect(() => {
-    fetch('/suggestions.json')
-      .then((res) => res.json())
-      .then((data) => {
-        console.log('Loaded emoji map:', data); // Check this!
-        setEmojiMap(data);
-      })
-      .catch((err) => console.error('Failed to load emoji map:', err));
-  }, []);
 
   useEffect(() => {
     const storedEntries = JSON.parse(localStorage.getItem('journalEntries')) || {};
@@ -103,7 +92,10 @@ const JournalList = () => {
       <h1 className="journal-header">Journal</h1>
       <EntryButton />
       <div className="calendar d-flex justify-content-center">
-        <JournalCalendar setSelectedDate={setSelectedDate} />
+        <JournalCalendar
+          setSelectedDate={setSelectedDate}
+          selectedDate={selectedDate}
+        />
       </div>
       <h3 className="previous-entries-title">Previous Entries</h3>
       <div className="previous-entries d-flex flex-column justify-content-center ">
@@ -116,7 +108,7 @@ const JournalList = () => {
                   key={index}
                   entry={entry}
                   index={index}
-                  emoji = {emojiMap[entry.emotion]?.emoji || '😐'}
+                  emojiUrl={`${process.env.PUBLIC_URL}/images/${entry.emotion}.svg`}
                   onDelete={handleRemoveEntry}
                 />
               )

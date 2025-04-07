@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
-export const JournalCalendar = ({ setSelectedDate }) => {
+export const JournalCalendar = ({ setSelectedDate, selectedDate }) => {
     const [entries, setEntries] = useState({});
     const [emotions, setEmotions] = useState({});
 
@@ -22,7 +22,7 @@ export const JournalCalendar = ({ setSelectedDate }) => {
     useEffect(() => {
         async function fetchEmotions() {
             try {
-                const response = await fetch('/suggestions.json');
+                const response = await fetch('/cs378-project/suggestions.json');
                 if (!response.ok) throw new Error('Could not fetch emoji data');
                 const data = await response.json();
                 setEmotions(data);
@@ -41,20 +41,27 @@ export const JournalCalendar = ({ setSelectedDate }) => {
 
         if (Array.isArray(dateEntries) && dateEntries.length > 0) {
             const emotion = dateEntries[0]?.emotion || 'bored';
-            const emoji = emotions[emotion]?.emoji || '😐';
             return (
-                <span style={{padding: '3px' }}>
-                    {emoji}
-                </span>
+                <img src={`${process.env.PUBLIC_URL}/images/${emotion}.svg`} alt="emotion" style={{ width: '24px', height: '24px', marginRight: '0.5rem' }} />
             );
         }
         return null;
     };
 
+    const onChangeDate = (date) => {
+        const formattedDate = date.toLocaleDateString('en-CA');
+        setSelectedDate(formattedDate);
+    };
+
+    const parseLocalDate = (dateStr) => {
+        const [year, month, day] = dateStr.split('-').map(Number);
+        return new Date(year, month - 1, day);
+    };
+
     return (
         <Calendar
-            onChange={(date) => setSelectedDate(date.toISOString().split('T')[0])}
-            value={new Date()}
+            onChange={onChangeDate}
+            value={parseLocalDate(selectedDate)}
             tileContent={tileContent}
             locale="en-US"
         />

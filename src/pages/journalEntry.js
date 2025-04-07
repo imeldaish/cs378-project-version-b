@@ -12,18 +12,6 @@ const JournalEntry = () => {
   const [input, setInput] = useState('');
   const navigate = useNavigate();
 
-  const [emojiMap, setEmojiMap] = useState({});
-
-  useEffect(() => {
-    fetch('/suggestions.json')
-      .then((res) => res.json())
-      .then((data) => {
-        console.log('Loaded emoji map:', data);
-        setEmojiMap(data);
-      })
-      .catch((err) => console.error('Failed to load emoji map:', err));
-  }, []);
-
   useEffect(() => {
     const storedEntries = JSON.parse(localStorage.getItem('journalEntries'));
     if (storedEntries) {
@@ -59,7 +47,7 @@ const JournalEntry = () => {
     navigate('/journalList');
   };
   const goHome = () => {
-    navigate('/');
+    navigate('/index.js');
   };
 
   const handleClear = () => {
@@ -84,19 +72,14 @@ const JournalEntry = () => {
       </form>
 
       <ul style={{ marginTop: '1rem' }}>
-      {(entries[selectedDate] || []).map((entry, index) => {
-  console.log('Rendering entry:', entry);
-  return (
-    <li key={index} style={{ marginBottom: '1rem' }}>
-      <div>
-        <span style={{ fontSize: '1.5rem', marginRight: '0.5rem' }}>
-          {emojiMap[entry.emotion]?.emoji || '😐'}
-        </span>
-        {entry.text}
-      </div>
-    </li>
-  );
-})}
+        {(entries[selectedDate] || []).map((entry, index) => (
+          <li key={index} style={{ marginBottom: '1rem' }}>
+            <div>
+              <img src={`${process.env.PUBLIC_URL}/images/${entry.emotion}.svg`} alt="emotion" style={{ width: '24px', height: '24px', marginRight: '0.5rem' }} />
+              {entry.text}
+            </div>
+          </li>
+        ))}
       </ul>
     </div>
   );
