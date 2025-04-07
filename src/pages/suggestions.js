@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom'; 
-import LoadBar from '../components/LoadBar';
+import LoadBar from '../components/Loadbar';
 
 const SuggestionPage = () => {
   const [suggestions, setSuggestions] = useState({});
@@ -19,7 +19,6 @@ const SuggestionPage = () => {
   }, [state]);
 
   const emotion = state?.emotion || sessionStorage.getItem("emotion") || "bored";
-
 
   async function fetchSuggestion() {
     setLoading(true);

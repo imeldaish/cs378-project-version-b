@@ -12,6 +12,17 @@ const JournalEntry = () => {
   const [input, setInput] = useState('');
   const navigate = useNavigate();
 
+  const [emojiMap, setEmojiMap] = useState({});
+
+  useEffect(() => {
+    fetch('/cs378-project/suggestions.json')
+      .then((res) => res.json())
+      .then((data) => {
+        setEmojiMap(data);
+      })
+      .catch((err) => console.error('Failed to load emoji map:', err));
+  }, []);
+
   useEffect(() => {
     const storedEntries = JSON.parse(localStorage.getItem('journalEntries'));
     if (storedEntries) {
@@ -26,30 +37,28 @@ const JournalEntry = () => {
   const handleAddEntry = (e) => {
     e.preventDefault();
     if (input.trim() === '') return;
+
+    const emotion = sessionStorage.getItem('emotion') || 'bored';
+    const newEntry = {
+      text: input.trim(),
+      emotion: emotion
+    };
+
     const newEntries = {
       ...entries,
-      [selectedDate]: [...(entries[selectedDate] || []), input.trim()]
+      [selectedDate]: [...(entries[selectedDate] || []), newEntry],
     };
+
     setEntries(newEntries);
     localStorage.setItem('journalEntries', JSON.stringify(newEntries));
     setInput('');
   };
 
-
   const handleGoBack = () => {
     navigate('/journalList');
   };
   const goHome = () => {
-    navigate('/App.js');
-  };
-
-  const handleRemoveEntry = (index) => {
-    const newEntries = [
-      ...entries.slice(0, index),
-      ...entries.slice(index + 1),
-    ];
-    setEntries(newEntries);
-    updateLocalStorage(newEntries);
+    navigate('/index.js');
   };
 
   const handleClear = () => {
@@ -73,13 +82,15 @@ const JournalEntry = () => {
         <button onClick={goHome}>Main Menu</button>
       </form>
 
-
-
       <ul style={{ marginTop: '1rem' }}>
         {(entries[selectedDate] || []).map((entry, index) => (
           <li key={index} style={{ marginBottom: '1rem' }}>
-            <div>{entry}</div>
-            <button onClick={() => handleRemoveEntry(index)}>Delete</button>
+            <div>
+              <span style={{ fontSize: '1.5rem', marginRight: '0.5rem' }}>
+                {emojiMap[entry.emotion]?.emoji || '😐'}
+              </span>
+              {entry.text}
+            </div>
           </li>
         ))}
       </ul>

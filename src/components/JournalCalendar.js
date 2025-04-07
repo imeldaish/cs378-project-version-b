@@ -4,7 +4,9 @@ import 'react-calendar/dist/Calendar.css';
 
 export const JournalCalendar = ({ setSelectedDate }) => {
     const [entries, setEntries] = useState({});
+    const [emotions, setEmotions] = useState({});
 
+    // Load entries from localStorage
     useEffect(() => {
         const fetchEntries = () => {
             const storedEntries = JSON.parse(localStorage.getItem('journalEntries')) || {};
@@ -13,14 +15,38 @@ export const JournalCalendar = ({ setSelectedDate }) => {
 
         fetchEntries();
         window.addEventListener("storage", fetchEntries);
-
         return () => window.removeEventListener("storage", fetchEntries);
     }, []);
 
+    // Load emotion data from suggestions.json
+    useEffect(() => {
+        async function fetchEmotions() {
+            try {
+                const response = await fetch('/cs378-project/suggestions.json');
+                if (!response.ok) throw new Error('Could not fetch emoji data');
+                const data = await response.json();
+                setEmotions(data);
+            } catch (error) {
+                console.error("Failed to fetch emotions:", error);
+            }
+        }
+
+        fetchEmotions();
+    }, []);
+
     const tileContent = ({ date, view }) => {
+        if (view !== 'month') return null;
         const formattedDate = date.toISOString().split('T')[0];
-        if (view === 'month' && Array.isArray(entries[formattedDate]) && entries[formattedDate].length > 0) {
-            return <span style={{ background: 'lightblue', borderRadius: '50%', padding: '3px' }}>😞</span>;
+        const dateEntries = entries[formattedDate];
+
+        if (Array.isArray(dateEntries) && dateEntries.length > 0) {
+            const emotion = dateEntries[0]?.emotion || 'bored';
+            const emoji = emotions[emotion]?.emoji || '❓';
+            return (
+                <span style={{padding: '3px' }}>
+                    {emoji}
+                </span>
+            );
         }
         return null;
     };

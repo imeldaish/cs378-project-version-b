@@ -152,3 +152,47 @@
   font-size: 14px;
   color: #555;
 }
+
+/******************Journal List***********************/
+.journal-header {
+  font-weight: bold;
+  padding-top: 10px;
+}
+
+.calendar {
+  padding: 10px 10px;
+}
+
+.new-entry-button {
+  border-radius: 50px;
+  background-color: #49ba29;
+  margin: 10px;
+  font-size: larger;
+  padding: 10px 15px;
+  border: solid #CAE8A2 5px;
+  transition: border 0.2s ease;
+}
+
+.back-button {
+  background-color: black;
+  color: white;
+  padding: 5px 10px;
+  font-size: medium;
+  border-radius: 50px;
+}
+
+.previous-entries-title {
+  padding: 10px 2px;
+}
+
+.previous-entries {
+  border-radius: 20px;
+  background-color: white;
+  width: 50vw;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.entry-date {
+  padding: 10px 10px;
+}
