@@ -78,8 +78,9 @@ const JournalList = () => {
   };
 
   const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
+    const [year, month, day] = dateString.split('-').map(Number);
+    const localDate = new Date(year, month - 1, day);
+    return localDate.toLocaleDateString('en-US', {
       weekday: 'short',
       year: 'numeric',
       month: 'short',

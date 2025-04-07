@@ -42,7 +42,7 @@ export const JournalCalendar = ({ setSelectedDate, selectedDate }) => {
         if (Array.isArray(dateEntries) && dateEntries.length > 0) {
             const emotion = dateEntries[0]?.emotion || 'bored';
             return (
-                <img src={`${process.env.PUBLIC_URL}/images/${emotion}.svg`} alt="emotion" style={{ width: '24px', height: '24px', marginRight: '0.5rem' }} />
+                <img src={`${process.env.PUBLIC_URL}/images/${emotion}.svg`} alt="emotion" style={{ width: '24px', height: '24px', marginRight: '0.5rem', marginLeft: '0.5rem'}} />
             );
         }
         return null;
