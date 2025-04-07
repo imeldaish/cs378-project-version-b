@@ -22,7 +22,7 @@ export const JournalCalendar = ({ setSelectedDate }) => {
     useEffect(() => {
         async function fetchEmotions() {
             try {
-                const response = await fetch('/cs378-project/suggestions.json');
+                const response = await fetch('/suggestions.json');
                 if (!response.ok) throw new Error('Could not fetch emoji data');
                 const data = await response.json();
                 setEmotions(data);
@@ -41,7 +41,7 @@ export const JournalCalendar = ({ setSelectedDate }) => {
 
         if (Array.isArray(dateEntries) && dateEntries.length > 0) {
             const emotion = dateEntries[0]?.emotion || 'bored';
-            const emoji = emotions[emotion]?.emoji || '❓';
+            const emoji = emotions[emotion]?.emoji || '😐';
             return (
                 <span style={{padding: '3px' }}>
                     {emoji}
