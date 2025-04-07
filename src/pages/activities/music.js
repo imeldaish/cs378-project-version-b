@@ -1,5 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import CustomAudioPlayer from '../../components/AudioPlayer';
+import { useNavigate } from "react-router-dom";
+
+const BackButton = () => {
+  const navigate = useNavigate();
+  return (
+    <div style={{ padding: "12px 12px" }}>
+      <button className="back-button" variant="primary" onClick={() => navigate("/suggestions")}>
+        Back to Suggestions
+      </button>
+    </div>
+  );
+};
 
 const Music = () => {
   const [playlist, setPlaylist] = useState([]);
@@ -39,14 +51,14 @@ const Music = () => {
 
       {currentTrack && (
         <div className="activity-display-box">
-        <CustomAudioPlayer 
-          src={`/cs378-project/${currentTrack.source}`} 
-          title={currentTrack.title}
-        />
+          <CustomAudioPlayer
+            src={`/cs378-project/${currentTrack.source}`}
+            title={currentTrack.title}
+          />
         </div>
       )}
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px', width: '85vw', margin: '0 auto'}}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px', width: '85vw', margin: '0 auto' }}>
         {playlist.map((track, index) => (
           <button
             key={index}
@@ -56,6 +68,7 @@ const Music = () => {
           </button>
         ))}
       </div>
+      <BackButton />
     </div>
   );
 };
