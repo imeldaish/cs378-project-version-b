@@ -59,8 +59,13 @@
   margin: 10px;
   font-size: larger;
   padding: 10px 15px;
-  border: solid #CAE8A2 5px;;
+  border: solid #CAE8A2 5px;
   transition: border 0.2s ease;
+}
+
+.suggestion-button:hover {
+  background-color: #49BA29;
+  border: solid #49BA29 5px;
 }
 
 .suggestion-button.active {
