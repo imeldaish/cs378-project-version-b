@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom'; 
-import LoadBar from '../components/Loadbar.js';
+import LoadBar from '../components/LoadBar.js';
 import { ArrowBigLeft } from 'lucide-react';
 
 const SuggestionPage = () => {
