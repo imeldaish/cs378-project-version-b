@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom'; 
-import LoadBar from '../components/Loadbar';
+import LoadBar from '../components/loadbar.js';
 
 const SuggestionPage = () => {
   const [suggestions, setSuggestions] = useState({});
