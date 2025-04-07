@@ -196,3 +196,74 @@
 .entry-date {
   padding: 10px 10px;
 }
+
+.home-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: white;
+  height: 179px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.header-text {
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.header-title {
+  margin-top: 44px;
+  font-size: 42px;
+  font-weight: 700;
+}
+
+.feel-text {
+  color: #49BA29;
+}
+
+.emoji-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background-color: white;
+  padding-top: 15px;
+  border-radius: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.selected-emotion {
+  margin-top: 20px;
+}
+
+.emoji-img-selected {
+  width: 136px;
+  height: 136px;
+}
+
+.button {
+  background-color: black;
+  color: white;
+  border-radius: 21.5px;
+  width: 134px;
+  height: 43px;
+  font-weight: bold;
+}
+
+.mood-name-selected {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  font-size: 24px;
+  font-weight: 400;
+  height: 36px;
+  margin-top: 20px;
+  margin-left: 100px;
+  margin-right: 100px;
+  border-radius: 18px;
+}

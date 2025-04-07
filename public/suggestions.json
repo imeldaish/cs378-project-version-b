@@ -1,6 +1,6 @@
 {
   "bored": {
-      "emoji": "😑",
+      "emoji": "/cs378-project/images/bored.svg",
       "suggestions": [
           { "activity": "journal", "link": "/journalList" },
           { "activity": "meditation", 
@@ -14,21 +14,21 @@
       ]
   },
   "happy": {
-      "emoji": "😊",
+      "emoji": "/cs378-project/images/happy.svg",
       "suggestions": [
           { "activity": "journal", "link": "/journalList" },
           { "activity": "yoga", "link": "/activities/yoga" }
       ]
   },
   "angry": {
-      "emoji": "😡",
+      "emoji": "/cs378-project/images/angry.svg",
       "suggestions": [
           { "activity": "deep breathing", "link": "/activities/breathing" },
           { "activity": "boxing workout", "link": "/activities/boxing" }
       ]
   },
   "sad": {
-      "emoji": "😢",
+      "emoji": "/cs378-project/images/sad.svg",
       "suggestions": [
           { "activity": "journal", "link": "/journalList" },
           { "activity": "listen to calming music", 
@@ -42,28 +42,28 @@
       ]
   },
   "anxious": {
-      "emoji": "😰",
+      "emoji": "/cs378-project/images/anxious.svg",
       "suggestions": [
           { "activity": "guided meditation", "link": "/activities/meditation" },
           { "activity": "5-4-3-2-1 grounding exercise", "link": "/activities/grounding" }
       ]
   },
   "excited": {
-      "emoji": "🤩",
+      "emoji":"/cs378-project/images/excited.svg",
       "suggestions": [
           { "activity": "journal", "link": "/journalList" },
           { "activity": "share your excitement with a friend", "link": "/activities/social" }
       ]
   },
   "stressed": {
-      "emoji": "😖",
+      "emoji": "/cs378-project/images/stressed.svg",
       "suggestions": [
           { "activity": "progressive muscle relaxation", "link": "/activities/relaxation" },
           { "activity": "take a short walk", "link": "/activities/walking" }
       ]
   },
   "guilty": {
-      "emoji": "😔",
+      "emoji": "/cs378-project/images/guilty.svg",
       "suggestions": [
           { "activity": "journal", "link": "/journalList" },
           { "activity": "practice self-compassion", "link": "/activities/selfcare" }

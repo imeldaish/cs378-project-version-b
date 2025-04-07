@@ -38,16 +38,24 @@ const MoodPage = () => {
 
   return (
     <div>
-      <h1>Hi, Maya</h1>
-      <h3>How do you feel today?</h3>
+      <div className="home-header">
+        <div className="header-text"> 
+          <h1 className="header-title">Hi, Maya!</h1>
+          <h3>How do you <span className="feel-text">feel</span> today?</h3>
+        </div>
+      </div>
 
       <div className="selected-emotion">
         <div className="emoji">
-          {emotions[selectedEmotion]?.emoji}
+          <img
+            src={emotions[selectedEmotion]?.emoji.replace('.svg', '_select.svg')}
+            alt={`${selectedEmotion} emoji`}
+            className="emoji-img-selected"
+          />
         </div>
-        <p className="mood-name">
-          {selectedEmotion.charAt(0).toUpperCase() + selectedEmotion.slice(1)}
-        </p>
+          <p className="mood-name-selected">
+            {selectedEmotion.toUpperCase()}
+          </p>
       </div>
 
       <div className="emoji-grid">
@@ -58,16 +66,23 @@ const MoodPage = () => {
             onClick={() => handleEmojiClick(mood)} // Add click handler
             style={{
               cursor: 'pointer',
-              border: mood === selectedEmotion ? '2px solid blue' : 'none', // Highlight selected emoji
             }}
           >
-            <span className="emoji">{data.emoji}</span>
-            <p className="mood-name">{mood.charAt(0).toUpperCase() + mood.slice(1)}</p>
+            <img
+              src={
+                mood === selectedEmotion
+                  ? data.emoji.replace('.svg', '_select.svg')
+                  : data.emoji
+              }
+              alt={`${mood} emoji`}
+              className="emoji-img"
+            />
+            <p className="mood-name">{mood.toUpperCase()}</p>
           </div>
         ))}
       </div>
 
-      <button onClick={handleNextClick}>Next</button>
+      <button class="button" onClick={handleNextClick}>DONE</button>
     </div>
   );
 };
