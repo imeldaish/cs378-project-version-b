@@ -47,7 +47,7 @@ const JournalEntry = () => {
     navigate('/journalList');
   };
   const goHome = () => {
-    navigate('/index.js');
+    navigate('/');
   };
 
   const handleClear = () => {
