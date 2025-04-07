@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CustomAudioPlayer from '../../components/AudioPlayer';
 import { useNavigate } from "react-router-dom";
+import CompleteButton from '../../components/CompleteButton';
 
 const BackButton = () => {
   const navigate = useNavigate();
@@ -68,6 +69,7 @@ const Music = () => {
           </button>
         ))}
       </div>
+      {/* <CompleteButton/> */}
       <BackButton />
     </div>
   );

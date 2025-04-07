@@ -6,6 +6,7 @@ import SuggestionPage from './pages/suggestions';
 import JournalListPage from './pages/journalList';
 import JournalEntryPage from './pages/journalEntry';
 import ActivityPage from './pages/activity';
+import CompletedPage from './pages/completed';
 
 import Navbar from './components/Navbar';
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/journalList" element={<JournalListPage />}></Route>
           <Route path="/journalEntry" element={<JournalEntryPage />}></Route>
           <Route path="/activities/:activityName" element={<ActivityPage />} />
+          <Route path="/completed" element={<CompletedPage />} />
         </Routes>
         <Navbar/>
       </Router>

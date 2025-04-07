@@ -66,6 +66,7 @@
 .suggestion-button:hover {
   background-color: #49BA29;
   border: solid #49BA29 5px;
+  color: white;
 }
 
 .suggestion-button.active {
