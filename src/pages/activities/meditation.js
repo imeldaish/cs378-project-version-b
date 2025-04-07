@@ -42,6 +42,7 @@ const Meditation = () => {
         <CustomAudioPlayer 
           src={`/cs378-project/${currentTrack.source}`} 
           title={currentTrack.title}
+          className="audio-player"
         />
         </div>
       )}
