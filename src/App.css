@@ -66,6 +66,7 @@
 .suggestion-button:hover {
   background-color: #49BA29;
   border: solid #49BA29 5px;
+  color: white;
 }
 
 .suggestion-button.active {
@@ -90,6 +91,10 @@
   padding: 20px;
   text-align: center;
   margin-bottom: 20px;
+}
+
+.audio-player{
+  margin: 0 auto;
 }
 
 .playlist-button {

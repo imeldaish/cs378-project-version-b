@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CustomAudioPlayer from '../../components/AudioPlayer';
+import CompleteButton from '../../components/CompleteButton';
+import BackButton from '../../components/SuggestionButton';
 
 const Meditation = () => {
   const [playlist, setPlaylist] = useState([]);
@@ -42,6 +44,7 @@ const Meditation = () => {
         <CustomAudioPlayer 
           src={`/cs378-project/${currentTrack.source}`} 
           title={currentTrack.title}
+          className="audio-player"
         />
         </div>
       )}
@@ -56,6 +59,8 @@ const Meditation = () => {
           </button>
         ))}
       </div>
+      {/* <CompleteButton/> */}
+      <BackButton/>
     </div>
   );
 };
