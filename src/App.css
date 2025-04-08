@@ -33,6 +33,28 @@
   border-radius: 50px;
 }
 
+/***********************Navbar************************************/
+
+.navbar {
+  display: flex;
+  background-color: white;
+  margin-top: 20px;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  height: 99px;
+
+
+}
+
+.navbar ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;  
+  width: 90%;
+  margin-left: 35px;
+}
+
 /***********************Suggestions************************************/
 
 .suggestion-page{
