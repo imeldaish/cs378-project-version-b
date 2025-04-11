@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { database, ref, push } from '../components/firebase';
+
+import { useRef } from 'react';
 
 const JournalEntry = () => {
   const [entries, setEntries] = useState({});
+  const [input, setInput] = useState('');
   const getLocalDate = () => {
     const today = new Date();
     today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
     return today.toISOString().split('T')[0];
   };
   const [selectedDate] = useState(getLocalDate());
-  const [input, setInput] = useState('');
   const navigate = useNavigate();
+
+  const addEntryTimeRef = useRef(null);
 
   useEffect(() => {
     const storedEntries = JSON.parse(localStorage.getItem('journalEntries'));
@@ -26,29 +31,58 @@ const JournalEntry = () => {
   const handleAddEntry = (e) => {
     e.preventDefault();
     if (input.trim() === '') return;
-
+  
     const emotion = sessionStorage.getItem('emotion') || 'bored';
     const newEntry = {
       text: input.trim(),
       emotion: emotion
     };
-
+  
     const newEntries = {
       ...entries,
       [selectedDate]: [...(entries[selectedDate] || []), newEntry],
     };
-
+  
     setEntries(newEntries);
     localStorage.setItem('journalEntries', JSON.stringify(newEntries));
     setInput('');
+    addEntryTimeRef.current = Date.now();
   };
+  
 
   const handleGoBack = () => {
     navigate('/journalList');
   };
   const goHome = () => {
-    navigate('/');
+    if (addEntryTimeRef.current) {
+      const endTime = Date.now();
+      const elapsedTimeSeconds = Number(((endTime - addEntryTimeRef.current) / 1000).toFixed(4));
+  
+      const userName = sessionStorage.getItem('userName') || 'Unknown';
+      const data = {
+        name: userName,
+        event: "Time from Add Entry to Main Menu",
+        version: "A",
+        startTime: new Date(addEntryTimeRef.current).toLocaleString(),
+        endTime: new Date(endTime).toLocaleString(),
+        elapsedTimeSeconds
+      };
+
+      push(ref(database, 'timers/'), data)
+        .then(() => {
+          console.log('Add-to-Main time saved to Firebase ✅');
+          navigate('/');
+        })
+        .catch(error => {
+          console.error('Error saving time:', error);
+          navigate('/');
+        });
+    } else {
+      // If no Add Entry clicked, just navigate
+      navigate('/');
+    }
   };
+  
 
   const handleClear = () => {
     setInput('');

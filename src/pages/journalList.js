@@ -1,60 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { JournalCalendar } from '../components/JournalCalendar';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
+import { JournalCalendar } from '../components/JournalCalendar';
+import { database, ref, push } from '../components/firebase';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const EntryButton = () => {
-  const navigate = useNavigate();
-  return (
-    <button className="new-entry-button" variant="primary" onClick={() => navigate("/journalEntry")}>
-      New Entry Today
-    </button>
-  );
-};
-
-const BackButton = () => {
-  const navigate = useNavigate();
-  return (
-    <div style={{ padding: "12px 12px" }}>
-      <button className="back-button" variant="primary" onClick={() => navigate("/suggestions")}>
-        Back to Suggestions
-      </button>
-    </div>
-  );
-};
-
-const JournalListItem = ({ entry, entryKey, onDelete, emojiUrl }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  return (
-    <li className="list-group-item">
-      <div
-        style={{ cursor: 'pointer' }}
-        onClick={() => setIsExpanded(!isExpanded)}
-      >
-        <img src={emojiUrl} alt="emotion" style={{ width: '24px', height: '24px', marginRight: '0.5rem' }} />
-        {entry.text}
-      </div>
-
-      {isExpanded && (
-        <div className="mt-2 d-flex gap-2 justify-content-right">
-          <button className="btn btn-sm btn-secondary">Edit</button>
-          <button
-            className="btn btn-sm btn-danger"
-            onClick={() => onDelete(entryKey)}
-          >
-            Delete
-          </button>
-        </div>
-      )}
-    </li>
-  );
-};
 
 const JournalList = () => {
-
   const [entries, setEntries] = useState({});
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
+
+  const navigate = useNavigate();
+
+  // ⏱️ Stopwatch tracking
+  const startTimeRef = useRef(Date.now());
 
   useEffect(() => {
     const storedEntries = JSON.parse(localStorage.getItem('journalEntries')) || {};
@@ -77,6 +35,34 @@ const JournalList = () => {
     updateLocalStorage(updatedEntries);
   };
 
+const handleNewEntryClick = () => {
+  const endTime = Date.now();
+  const elapsedTimeSeconds = Number(((endTime - startTimeRef.current) / 1000).toFixed(4));
+  ;
+
+  const userName = sessionStorage.getItem('userName') || 'Unknown';
+  const data = {
+    name: userName,
+    event: "new journal entry",
+    version: "A",
+    startTime: new Date(startTimeRef.current).toLocaleString(),
+    endTime: new Date(endTime).toLocaleString(),
+    elapsedTimeSeconds
+  };
+
+  push(ref(database, 'timers/'), data)
+    .then(() => {
+      console.log('Timer data saved to Firebase');
+      navigate("/journalEntry");
+    })
+    .catch(error => {
+      console.error('Error saving data:', error);
+      navigate("/journalEntry"); // Optional: still navigate on error
+    });
+};
+
+  
+
   const formatDate = (dateString) => {
     const [year, month, day] = dateString.split('-').map(Number);
     const localDate = new Date(year, month - 1, day);
@@ -91,15 +77,19 @@ const JournalList = () => {
   return (
     <div>
       <h1 className="journal-header">Journal</h1>
-      <EntryButton />
+      <button className="new-entry-button" onClick={handleNewEntryClick}>
+        New Entry Today
+      </button>
+
       <div className="calendar d-flex justify-content-center">
         <JournalCalendar
           setSelectedDate={setSelectedDate}
           selectedDate={selectedDate}
         />
       </div>
+
       <h3 className="previous-entries-title">Previous Entries</h3>
-      <div className="previous-entries d-flex flex-column justify-content-center ">
+      <div className="previous-entries d-flex flex-column justify-content-center">
         <h4 className="entry-date">{formatDate(selectedDate)}</h4>
         <div>
           <ul className="list-group">
@@ -112,15 +102,49 @@ const JournalList = () => {
                   emojiUrl={`${process.env.PUBLIC_URL}/images/${entry.emotion}.svg`}
                   onDelete={handleRemoveEntry}
                 />
-              )
-              )
+              ))
             ) : (
               <li className="list-group-item">No entries</li>
             )}
           </ul>
         </div>
       </div>
+
       <BackButton />
+    </div>
+  );
+};
+
+// Move these components here to keep clean
+const JournalListItem = ({ entry, index, onDelete, emojiUrl }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <li className="list-group-item">
+      <div style={{ cursor: 'pointer' }} onClick={() => setIsExpanded(!isExpanded)}>
+        <img src={emojiUrl} alt="emotion" style={{ width: '24px', height: '24px', marginRight: '0.5rem' }} />
+        {entry.text}
+      </div>
+
+      {isExpanded && (
+        <div className="mt-2 d-flex gap-2 justify-content-right">
+          <button className="btn btn-sm btn-secondary">Edit</button>
+          <button className="btn btn-sm btn-danger" onClick={() => onDelete(index)}>
+            Delete
+          </button>
+        </div>
+      )}
+    </li>
+  );
+};
+
+const BackButton = () => {
+  const navigate = useNavigate();
+  return (
+    <div style={{ padding: "12px 12px" }}>
+      <button className="back-button" onClick={() => navigate("/suggestions")}>
+        Back to Suggestions
+      </button>
     </div>
   );
 };
