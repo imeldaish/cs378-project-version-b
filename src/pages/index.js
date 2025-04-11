@@ -6,10 +6,31 @@ const MoodPage = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedEmotion, setSelectedEmotion] = useState('bored');
+  const [name, setName] = useState(sessionStorage.getItem('userName') || '');
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedName = sessionStorage.getItem('userName');
+    if (!storedName) {
+      const userName = prompt("Welcome! What's your name?");
+      if (userName && userName.trim() !== '') {
+        sessionStorage.setItem('userName', userName.trim());
+        setName(userName.trim());
+      } else {
+        sessionStorage.setItem('userName', 'Guest');
+        setName('Guest');
+      }
+    } else {
+      setName(storedName);
+    }
+  }, []);
+  
+
   const handleEmojiClick = (mood) => {
     setSelectedEmotion(mood);
   };
+
   const handleNextClick = () => {
     navigate('/suggestions', { state: { emotion: selectedEmotion } });
   };
@@ -39,8 +60,8 @@ const MoodPage = () => {
   return (
     <div>
       <div className="home-header">
-        <div className="header-text"> 
-          <h1 className="header-title">Hi, Maya!</h1>
+        <div className="header-text">
+          <h1 className="header-title">Hi, {name.charAt(0).toUpperCase() + name.slice(1)}!</h1>
           <h3>How do you <span className="feel-text">feel</span> today?</h3>
         </div>
       </div>
@@ -53,20 +74,18 @@ const MoodPage = () => {
             className="emoji-img-selected"
           />
         </div>
-          <p className="mood-name-selected">
-            {selectedEmotion.toUpperCase()}
-          </p>
+        <p className="mood-name-selected">
+          {selectedEmotion.toUpperCase()}
+        </p>
       </div>
 
       <div className="emoji-grid">
         {Object.entries(emotions).map(([mood, data]) => (
-          <div 
-            key={mood} 
+          <div
+            key={mood}
             className="emoji-item"
-            onClick={() => handleEmojiClick(mood)} // Add click handler
-            style={{
-              cursor: 'pointer',
-            }}
+            onClick={() => handleEmojiClick(mood)}
+            style={{ cursor: 'pointer' }}
           >
             <img
               src={
@@ -82,10 +101,9 @@ const MoodPage = () => {
         ))}
       </div>
 
-      <button class="button" onClick={handleNextClick}>DONE</button>
+      <button className="button" onClick={handleNextClick}>DONE</button>
     </div>
   );
 };
 
 export default MoodPage;
-
