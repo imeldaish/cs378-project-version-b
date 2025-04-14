@@ -1,0 +1,77 @@
+{
+  "bored": {
+      "emoji": "/cs378-project-version-b/images/bored.svg",
+      "suggestions": [
+          { "activity": "journal", "link": "/journalList" },
+          { "activity": "meditation", 
+            "link": "/activities/meditation",
+            "playlist": [
+                {"title":"Aura", "source": "/media/meditation/meditation-relaxing-music-background-320405.mp3"},
+                {"title": "Waterfall", "source": "/media/meditation/the-waterfall-meditation-271046.mp3"},
+                {"title": "Calm Soul", "source": "/media/meditation/calm-soul-meditation-247330.mp3"},
+                {"title": "Tranquility", "source": "media/meditation/piano-dreamcloud-meditation-179215.mp3"}],
+            "walkthroughs": [
+                {"title":"1 minute", "source": "https://soundcloud.com/ucsdmindfulness/1-min-mindful-moment-by-marta-patterson"},
+                {"title": "5 minutes", "source": "https://soundcloud.com/ucsdmindfulness/five-minute-mindful-moment"},
+                {"title": "10 minutes", "source": "https://soundcloud.com/ucsdmindfulness/10-min-mindful-moment"},
+                {"title": "20 minutes", "source": "https://soundcloud.com/ucsdmindfulness/loving-kindness-for-ourselves-by-cassondra-graff?in=ucsdmindfulness/sets/short-meditation-sessions"}]
+          }
+      ]
+  },
+  "happy": {
+      "emoji": "/cs378-project-version-b/images/happy.svg",
+      "suggestions": [
+          { "activity": "journal", "link": "/journalList" },
+          { "activity": "yoga", "link": "/activities/yoga" }
+      ]
+  },
+  "angry": {
+      "emoji": "/cs378-project-version-b/images/angry.svg",
+      "suggestions": [
+          { "activity": "deep breathing", "link": "/activities/breathing" },
+          { "activity": "boxing workout", "link": "/activities/boxing" }
+      ]
+  },
+  "sad": {
+      "emoji": "/cs378-project-version-b/images/sad.svg",
+      "suggestions": [
+          { "activity": "journal", "link": "/journalList" },
+          { "activity": "listen to calming music", 
+            "link": "/activities/music",
+            "playlist": [
+                    {"title":"water dance", "source": "/media/calm-music/please-calm-my-mind-125566.mp3"},
+                    {"title": "piano", "source": "/media/calm-music/calm-classical-piano-291012.mp3"},
+                    {"title": "fantasy", "source": "/media/calm-music/calm-jazz-220610.mp3"},
+                    {"title": "lofi", "source": "media/calm-music/lofi-study-calm-peaceful-chill-hop-112191.mp3"}]
+            }
+      ]
+  },
+  "anxious": {
+      "emoji": "/cs378-project-version-b/images/anxious.svg",
+      "suggestions": [
+          { "activity": "guided meditation", "link": "/activities/meditation" },
+          { "activity": "5-4-3-2-1 grounding exercise", "link": "/activities/grounding" }
+      ]
+  },
+  "excited": {
+      "emoji":"/cs378-project-version-b/images/excited.svg",
+      "suggestions": [
+          { "activity": "journal", "link": "/journalList" },
+          { "activity": "share your excitement with a friend", "link": "/activities/social" }
+      ]
+  },
+  "stressed": {
+      "emoji": "/cs378-project-version-b/images/stressed.svg",
+      "suggestions": [
+          { "activity": "progressive muscle relaxation", "link": "/activities/relaxation" },
+          { "activity": "take a short walk", "link": "/activities/walking" }
+      ]
+  },
+  "guilty": {
+      "emoji": "/cs378-project-version-b/images/guilty.svg",
+      "suggestions": [
+          { "activity": "journal", "link": "/journalList" },
+          { "activity": "practice self-compassion", "link": "/activities/selfcare" }
+      ]
+  }
+}
