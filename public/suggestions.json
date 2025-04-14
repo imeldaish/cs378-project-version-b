@@ -6,11 +6,16 @@
           { "activity": "meditation", 
             "link": "/activities/meditation",
             "playlist": [
-                {"title":"meditation", "source": "/media/meditation/meditation-relaxing-music-background-320405.mp3"},
-                {"title": "waterfall", "source": "/media/meditation/the-waterfall-meditation-271046.mp3"},
-                {"title": "calm soul", "source": "/media/meditation/calm-soul-meditation-247330.mp3"},
-                {"title": "tranquil", "source": "media/meditation/piano-dreamcloud-meditation-179215.mp3"}]
-            }
+                {"title":"Aura", "source": "/media/meditation/meditation-relaxing-music-background-320405.mp3"},
+                {"title": "Waterfall", "source": "/media/meditation/the-waterfall-meditation-271046.mp3"},
+                {"title": "Calm Soul", "source": "/media/meditation/calm-soul-meditation-247330.mp3"},
+                {"title": "Tranquility", "source": "media/meditation/piano-dreamcloud-meditation-179215.mp3"}],
+            "walkthroughs": [
+                {"title":"1 minute", "source": "https://soundcloud.com/ucsdmindfulness/1-min-mindful-moment-by-marta-patterson"},
+                {"title": "5 minutes", "source": "https://soundcloud.com/ucsdmindfulness/five-minute-mindful-moment"},
+                {"title": "10 minutes", "source": "https://soundcloud.com/ucsdmindfulness/10-min-mindful-moment"},
+                {"title": "20 minutes", "source": "https://soundcloud.com/ucsdmindfulness/loving-kindness-for-ourselves-by-cassondra-graff?in=ucsdmindfulness/sets/short-meditation-sessions"}]
+          }
       ]
   },
   "happy": {
