@@ -7,7 +7,7 @@ const ActivityPage = () => {
   const ActivityComponent = React.lazy(() => import(`./activities/${activityName}`));
 
   return (
-    <div>
+    <div className='page'>
       <Suspense fallback={<div>Loading...</div>}>
         <ActivityComponent />
       </Suspense>

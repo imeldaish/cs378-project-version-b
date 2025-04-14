@@ -4,9 +4,26 @@
   min-height: 100vh;
   font-family: "Lexend", sans-serif;
 }
-.page{
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
-  padding-top: 20px;
+  position: relative;
+}
+
+.page{
+  min-height: calc(100vh - 110px);
+}
+
+.mood-page{
+  min-height: calc(100vh - 315px);
 }
 
 /***********************load bar************************************/
@@ -47,7 +64,7 @@
   border-top-left-radius: 20px;
   height: 99px;
   z-index: 1000;
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
 }
@@ -62,10 +79,6 @@
 }
 
 /***********************Suggestions************************************/
-
-.suggestion-page{
-  min-height: 100vh;
-}
 
 .header-container{
   background-color: white;
