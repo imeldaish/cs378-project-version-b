@@ -54,8 +54,9 @@ const SuggestionPage = () => {
   };
 
   return (
-    <div className='suggestion-page'>
-      <LoadBar percentage={50}/>
+    <>
+    <div className='page'>
+    <LoadBar percentage={50}/>
       <div className="back-button-container">
         <button className="back-button mt-2" onClick={() => navigate("/", { state: { emotion } })}>
           <ArrowBigLeft size={30}/>
@@ -100,6 +101,7 @@ const SuggestionPage = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

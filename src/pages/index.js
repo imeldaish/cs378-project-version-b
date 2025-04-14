@@ -58,13 +58,15 @@ const MoodPage = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div>
-      <div className="home-header">
+    <>
+    <div className="home-header">
         <div className="header-text">
           <h1 className="header-title">Hi, {name.charAt(0).toUpperCase() + name.slice(1)}!</h1>
           <h3>How do you <span className="feel-text">feel</span> today?</h3>
         </div>
       </div>
+    <div className='mood-page'>
+      
 
       <div className="selected-emotion">
         <div className="emoji">
@@ -103,6 +105,7 @@ const MoodPage = () => {
 
       <button className="button" onClick={handleNextClick}>DONE</button>
     </div>
+    </>
   );
 };
 

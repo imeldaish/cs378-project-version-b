@@ -89,7 +89,8 @@ const JournalEntry = () => {
   };
 
   return (
-    <div style={{ padding: '1rem' }}>
+    <>
+    <div className="page" style={{ padding: '1rem' }}>
       <h2>Journal Entry</h2>
       <form onSubmit={handleAddEntry}>
         <textarea
@@ -116,6 +117,7 @@ const JournalEntry = () => {
         ))}
       </ul>
     </div>
+    </>
   );
 };
 
