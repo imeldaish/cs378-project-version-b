@@ -1,7 +1,7 @@
 {
   "name": "bloom",
   "version": "0.1.0",
-  "homepage": "https://MayaLee393.github.io/cs378-project",
+  "homepage": "https://imeldaish.github.io/cs378-project-version-b",
   "private": true,
   "dependencies": {
     "@tabler/icons-react": "^3.31.0",

@@ -44,7 +44,7 @@ const handleNewEntryClick = () => {
   const data = {
     name: userName,
     event: "new journal entry",
-    version: "A",
+    version: "B",
     startTime: new Date(startTimeRef.current).toLocaleString(),
     endTime: new Date(endTime).toLocaleString(),
     elapsedTimeSeconds

@@ -13,7 +13,7 @@ const Meditation = () => {
   useEffect(() => {
     async function fetchSuggestions() {
       try {
-        const response = await fetch('/cs378-project/suggestions.json');
+        const response = await fetch('/cs378-project-version-b/suggestions.json');
         const data = await response.json();
 
         for (const emotion of Object.values(data)) {
@@ -56,7 +56,7 @@ const Meditation = () => {
       {currentTrack && (
         <div className="activity-display-box">
           <CustomAudioPlayer 
-            src={`/cs378-project/${currentTrack.source}`} 
+            src={`/cs378-project-version-b/${currentTrack.source}`} 
             title={currentTrack.title}
             className="audio-player"
           />

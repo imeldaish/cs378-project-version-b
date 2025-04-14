@@ -62,7 +62,7 @@ const JournalEntry = () => {
       const data = {
         name: userName,
         event: "Time from Add Entry to Main Menu",
-        version: "A",
+        version: "B",
         startTime: new Date(addEntryTimeRef.current).toLocaleString(),
         endTime: new Date(endTime).toLocaleString(),
         elapsedTimeSeconds

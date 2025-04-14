@@ -38,7 +38,7 @@ const MoodPage = () => {
   async function fetchMoods() {
     setLoading(true);
     try {
-      const response = await fetch('/cs378-project/suggestions.json');
+      const response = await fetch('/cs378-project-version-b/suggestions.json');
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
