@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { database, ref, push } from '../components/firebase';
-
+import { ArrowBigLeft } from 'lucide-react';
 import { useRef } from 'react';
+import CompleteButton from '../components/CompleteButton';
 
 const JournalEntry = () => {
   const [entries, setEntries] = useState({});
@@ -50,10 +51,7 @@ const JournalEntry = () => {
   };
   
 
-  const handleGoBack = () => {
-    navigate('/journalList');
-  };
-  const goHome = () => {
+  const goBack = () => {
     if (addEntryTimeRef.current) {
       const endTime = Date.now();
       const elapsedTimeSeconds = Number(((endTime - addEntryTimeRef.current) / 1000).toFixed(4));
@@ -71,15 +69,15 @@ const JournalEntry = () => {
       push(ref(database, 'timers/'), data)
         .then(() => {
           console.log('Add-to-Main time saved to Firebase ✅');
-          navigate('/');
+          navigate('/journalList');
         })
         .catch(error => {
           console.error('Error saving time:', error);
-          navigate('/');
+          navigate('/journalList');
         });
     } else {
       // If no Add Entry clicked, just navigate
-      navigate('/');
+      navigate('/journalList');
     }
   };
   
@@ -92,6 +90,11 @@ const JournalEntry = () => {
     <>
     <div className="page" style={{ padding: '1rem' }}>
       <h2>Journal Entry</h2>
+      <div className="back-button-container">
+        <button className="back-button mt-2 mb-2" onClick={goBack}>
+          <ArrowBigLeft size={30}/>
+        </button>
+      </div>
       <form onSubmit={handleAddEntry}>
         <textarea
           placeholder="Write your journal entry..."
@@ -102,8 +105,6 @@ const JournalEntry = () => {
         />
         <button type="submit" class="button">Add Entry</button>
         <button type="button" class="button" onClick={handleClear}>Clear</button>
-        <button class="button" onClick={handleGoBack}>My Entries</button>
-        <button class="button" onClick={goHome}>Main Menu</button>
       </form>
 
       <ul style={{ marginTop: '1rem' }}>

@@ -77,9 +77,6 @@ const handleNewEntryClick = () => {
   return (
     <div>
       <h1 className="journal-header">Journal</h1>
-      <button className="new-entry-button" onClick={handleNewEntryClick}>
-        New Entry Today
-      </button>
 
       <div className="calendar d-flex justify-content-center">
         <JournalCalendar
@@ -87,6 +84,10 @@ const handleNewEntryClick = () => {
           selectedDate={selectedDate}
         />
       </div>
+
+      <button className="new-entry-button" onClick={handleNewEntryClick}>
+        New Entry Today
+      </button>
 
       <h3 className="previous-entries-title">Previous Entries</h3>
       <div className="previous-entries d-flex flex-column justify-content-center">
