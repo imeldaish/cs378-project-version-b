@@ -107,7 +107,7 @@ const JournalEntry = () => {
         <button type="button" class="button" onClick={handleClear}>Clear</button>
       </form>
 
-      <ul style={{ marginTop: '1rem' }}>
+      <ul style={{ marginTop: '1rem', listStyleType:'none'}}>
         {(entries[selectedDate] || []).map((entry, index) => (
           <li key={index} style={{ marginBottom: '1rem' }}>
             <div>
