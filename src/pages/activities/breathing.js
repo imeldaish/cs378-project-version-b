@@ -11,38 +11,46 @@ const Breathing = () => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const intervalRef = useRef(null);
+  const inhaleRef = useRef(isInhale);
+  const cyclesRef = useRef(cycles);
   const navigate = useNavigate();
 
-  const startBreathing = () => {
-    if (cycles <= 0 || intervalRef.current) return;
+  useEffect(() => {
+    inhaleRef.current = isInhale;
+  }, [isInhale]);
 
-    const duration = 5000; 
+  useEffect(() => {
+    cyclesRef.current = cycles;
+  }, [cycles]);
+
+  useEffect(() => {
+    if (!isPlaying || cycles <= 0) return;
+
+    const duration = 4000; // 4 seconds
     const tickRate = 100;
     const totalTicks = duration / tickRate;
     let tick = 0;
 
-    const runCycle = () => {
-      intervalRef.current = setInterval(() => {
-        tick++;
-        const percent = tick / totalTicks;
+    intervalRef.current = setInterval(() => {
+      tick++;
+      const percent = tick / totalTicks;
+      const inhale = inhaleRef.current;
 
-        setProgress(isInhale ? percent : 1 - percent);
+      setProgress(inhale ? percent : 1 - percent);
 
-        if (tick >= totalTicks) {
-          clearInterval(intervalRef.current);
-          intervalRef.current = null;
-          setIsInhale((prev) => !prev);
-          if (!isInhale) setCycles((prev) => prev - 1);
+      if (tick >= totalTicks) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
 
-          if (isPlaying && cycles > 1) {
-            setTimeout(() => startBreathing(), 10);
-          }
+        setIsInhale((prev) => !prev);
+        if (!inhale) {
+          setCycles((prev) => prev - 1);
         }
-      }, tickRate);
-    };
+      }
+    }, tickRate);
 
-    runCycle();
-  };
+    return () => clearInterval(intervalRef.current);
+  }, [isInhale, isPlaying, cycles]);
 
   const handleTogglePlay = () => {
     if (isPlaying) {
@@ -51,7 +59,6 @@ const Breathing = () => {
       setIsPlaying(false);
     } else {
       setIsPlaying(true);
-      startBreathing();
     }
   };
 
