@@ -6,7 +6,10 @@ const MoodPage = () => {
   const [emotions, setEmotions] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [selectedEmotion, setSelectedEmotion] = useState('bored');
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [selectedEmotion, setSelectedEmotion] = useState(() => {
+    return sessionStorage.getItem('selectedEmotion') || 'bored';
+  });
   const [name, setName] = useState(sessionStorage.getItem('userName') || '');
 
   const navigate = useNavigate();
@@ -30,12 +33,13 @@ const MoodPage = () => {
 
   const handleEmojiClick = (mood) => {
     setSelectedEmotion(mood);
+    sessionStorage.setItem('selectedEmotion', mood);
   };
 
   const handleNextClick = () => {
     setIsGenerating(true); // show loading screen
     setTimeout(() => {
-    navigate('/suggestions', { state: { emotion: selectedEmotion } });
+      navigate('/suggestions', { state: { emotion: selectedEmotion } });
     }, 4000); // fake 2-second delay
   };
 
