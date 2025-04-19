@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import LoadingScreen from '../components/LoadingScreen';
 
 const MoodPage = () => {
   const [emotions, setEmotions] = useState({});
@@ -32,7 +33,10 @@ const MoodPage = () => {
   };
 
   const handleNextClick = () => {
+    setIsGenerating(true); // show loading screen
+    setTimeout(() => {
     navigate('/suggestions', { state: { emotion: selectedEmotion } });
+    }, 4000); // fake 2-second delay
   };
 
   async function fetchMoods() {
@@ -56,6 +60,10 @@ const MoodPage = () => {
   }, []);
 
   if (error) return <p>{error}</p>;
+
+  if (isGenerating) {
+    return <LoadingScreen />;
+  }
 
   return (
     <>
@@ -103,7 +111,7 @@ const MoodPage = () => {
         ))}
       </div>
 
-      <button className="button" onClick={handleNextClick}>DONE</button>
+      <button className="generate-suggestions-button" onClick={handleNextClick}>GENERATE SUGGESTIONS</button>
     </div>
     </>
   );

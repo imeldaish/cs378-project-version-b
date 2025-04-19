@@ -74,7 +74,7 @@ const SuggestionPage = () => {
         <p>{error}</p>
       ) : (
         <div>
-          <h3>Here are some suggestions based on your mood</h3>
+          <h3 className="suggestions-text">Here are some suggestions based on your mood</h3>
           <p>Select an activity to continue</p>
           <ul className='suggestion-list'>
             {suggestions[emotion] && suggestions[emotion].suggestions.length > 0? (
