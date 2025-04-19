@@ -76,21 +76,22 @@ const handleNewEntryClick = () => {
 
   return (
     <div>
-      <h1 className="journal-header">Journal</h1>
+      <BackButton />
+      <h1 className="journal-header">My Journal Entries</h1>
 
-      <div className="calendar d-flex justify-content-center">
+      <div className="calendar d-flex justify-content-center fade-in-up">
         <JournalCalendar
           setSelectedDate={setSelectedDate}
           selectedDate={selectedDate}
         />
       </div>
 
-      <button className="new-entry-button" onClick={handleNewEntryClick}>
-        New Entry Today
+      <button className="new-entry-button fade-in-up" onClick={handleNewEntryClick}>
+        Add New Entry +
       </button>
 
-      <h3 className="previous-entries-title">Previous Entries</h3>
-      <div className="previous-entries d-flex flex-column justify-content-center">
+      <h3 className="previous-entries-title fade-in-up">View Previous Entries</h3>
+      <div className="previous-entries d-flex flex-column justify-content-center fade-in-up">
         <h4 className="entry-date">{formatDate(selectedDate)}</h4>
         <div>
           <ul className="list-group">
@@ -110,8 +111,6 @@ const handleNewEntryClick = () => {
           </ul>
         </div>
       </div>
-
-      <BackButton />
     </div>
   );
 };
@@ -142,8 +141,8 @@ const JournalListItem = ({ entry, index, onDelete, emojiUrl }) => {
 const BackButton = () => {
   const navigate = useNavigate();
   return (
-    <div style={{ padding: "12px 12px" }}>
-      <button className="back-button" onClick={() => navigate("/suggestions")}>
+    <div className="back-button-container">
+      <button className="back-button-journal" onClick={() => navigate("/suggestions")}>
         Back to Suggestions
       </button>
     </div>

@@ -103,8 +103,10 @@ const JournalEntry = () => {
           rows={4}
           style={{ width: '100%', marginBottom: '0.5rem' }}
         />
-        <button type="submit" class="button">Add Entry</button>
-        <button type="button" class="button" onClick={handleClear}>Clear</button>
+        <div className="journal-entry-buttons">
+          <button type="submit" class="button">Add Entry</button>
+          <button type="button" class="button" onClick={handleClear}>Clear</button>
+        </div>
       </form>
 
       <ul style={{ marginTop: '1rem', listStyleType:'none'}}>
