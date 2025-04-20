@@ -99,7 +99,9 @@ body {
   background-color: white;
   margin: 10px;
   font-size: larger;
+  font-weight: 500;
   padding: 10px 15px;
+  width: 300px;
   border: solid #CAE8A2 5px;
   transition: border 0.2s ease;
 }
@@ -137,6 +139,8 @@ body {
 
 .suggestions-text {
   padding-top: 40px;
+  margin-left: 40px;
+  margin-right: 40px;
 }
 
 .loading-screen {
@@ -146,6 +150,8 @@ body {
   justify-content: center;
   height: 85vh;
   text-align: center;
+  margin-left: 80px;
+  margin-right: 80px;
 }
 
 .spinner {
@@ -219,7 +225,7 @@ body {
 
 .play-button {
   padding: 10px 20px;
-  background-color: #49ba29;
+  background-color: black;
   color: white;
   border: none;
   border-radius: 50px;
@@ -239,11 +245,18 @@ body {
 }
 
 .back-button-journal {
-  background: none;
-  border: none;
+  display: flex;
+  justify-content: left;
+  background-color: black;
+  color: white;
+  padding: 5px 10px 5px;
+  font-size: medium;
+  border-radius: 50px;
+}
+
+.button-wrapper {
   padding-top: 10px;
-  text-decoration: underline;
-  color: black;
+  padding-left: 10px;
 }
 
 .progress-bar {
@@ -271,7 +284,7 @@ body {
   height: 10px;
   background: linear-gradient(
     to right,
-    #49BA29 var(--value, 0%),
+    black var(--value, 0%),
     white var(--value, 0%)
   );
   border-radius: 50px; /* Full circle holder */
@@ -287,7 +300,7 @@ body {
   appearance: none;
   width: 16px;
   height: 16px;
-  background: #49BA29;
+  background: black;
   border-radius: 50%;
   cursor: pointer;
   border: none;
@@ -382,6 +395,16 @@ body {
 }
 
 .back-button {
+  background-color: black;
+  color: white;
+  padding: 5px 10px;
+  font-size: medium;
+  border-radius: 50px;
+}
+
+.back-button-yoga {
+  display: flex;
+  justify-content: left;
   background-color: black;
   color: white;
   padding: 5px 10px;
@@ -502,4 +525,12 @@ textarea {
   margin-left: 100px;
   margin-right: 100px;
   border-radius: 18px;
+}
+
+video {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
 }

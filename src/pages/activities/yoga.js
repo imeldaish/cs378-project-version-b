@@ -41,16 +41,10 @@ const Yoga = () => {
 
   return (
     <div className="App" style={{ padding: '20px' }}>
-      <h1 style={{ paddingBottom: '10px' }}>Yoga for Mental Wellness</h1>
-
-      <div className="button-group">
-        <button className="back-button" onClick={() => navigate("/home")}>
-          Home
-        </button>
-        <button className="back-button" onClick={() => navigate("/suggestions")}>
-          Back to Suggestions
-        </button>
-      </div>
+      <button className="back-button-yoga" onClick={() => navigate("/suggestions")}>
+        Back to Suggestions
+      </button>
+      <h1 style={{ paddingBottom: '10px', paddingTop: '25px' }}>Yoga for Mental Wellness</h1>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
       <VideoBox
         title="Morning Yoga Flow"
