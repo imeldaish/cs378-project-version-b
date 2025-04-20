@@ -1,8 +1,9 @@
-import React, { useRef, useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../App.css';
 import CustomAudioPlayer from '../../components/AudioPlayer';
+import LoadBar from '../../components/LoadBar.js';
+import { ArrowBigLeft } from 'lucide-react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const VideoBox = ({ title, videoSrc, refName, videoRefs, audioSrc, videoDescription }) => {
 
@@ -93,7 +94,7 @@ const Yoga = () => {
           videoDescription="Start your day with energy and focus. This gentle morning yoga session awakens your body, boosts circulation, and sets a positive tone for the day ahead."
         />
       </div>  
-      
+
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <VideoBox
           title="Evening Relaxation Yoga"
