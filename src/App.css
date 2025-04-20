@@ -100,7 +100,9 @@ body {
   margin: 10px;
   font-size: larger;
   font-weight: 500;
+  font-weight: 500;
   padding: 10px 15px;
+  width: 300px;
   width: 300px;
   border: solid #CAE8A2 5px;
   transition: border 0.2s ease;
@@ -141,6 +143,8 @@ body {
   padding-top: 40px;
   margin-left: 40px;
   margin-right: 40px;
+  margin-left: 40px;
+  margin-right: 40px;
 }
 
 .loading-screen {
@@ -150,6 +154,8 @@ body {
   justify-content: center;
   height: 85vh;
   text-align: center;
+  margin-left: 80px;
+  margin-right: 80px;
   margin-left: 80px;
   margin-right: 80px;
 }
@@ -210,7 +216,6 @@ body {
 .audio-player {
   width: 100%;
   max-width: 350px;
-  padding: 20px;
   border-radius: 15px;
   text-align: center;
   margin-bottom: 20px;
@@ -220,18 +225,43 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 50px;
+  width: 100%;
+  padding-left: 50px;
+  padding-right: 50px;
+  margin-bottom: 10px;
+}
+
+.yoga-video-desc {
+  background-color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.yoga-video-text {
+  margin-top: 10px;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 .play-button {
-  padding: 10px 20px;
   background-color: black;
   color: white;
   border: none;
-  border-radius: 50px;
+  border-radius: 50%;
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s ease;
+  width: 50px;
+  height: 50px;
 }
 
 .play-button:hover {
@@ -362,7 +392,6 @@ body {
   border: none;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 }
-
 
 
 /******************Journal List***********************/
