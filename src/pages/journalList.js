@@ -1,18 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
 import { JournalCalendar } from '../components/JournalCalendar';
-import { database, ref, push } from '../components/firebase';
+import LoadBar from '../components/LoadBar.js';
+import { ArrowBigLeft } from 'lucide-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 const JournalList = () => {
+
   const [entries, setEntries] = useState({});
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
 
   const navigate = useNavigate();
-
-  // ⏱️ Stopwatch tracking
-  const startTimeRef = useRef(Date.now());
 
   useEffect(() => {
     const storedEntries = JSON.parse(localStorage.getItem('journalEntries')) || {};
@@ -35,33 +33,9 @@ const JournalList = () => {
     updateLocalStorage(updatedEntries);
   };
 
-const handleNewEntryClick = () => {
-  const endTime = Date.now();
-  const elapsedTimeSeconds = Number(((endTime - startTimeRef.current) / 1000).toFixed(4));
-  ;
-
-  const userName = sessionStorage.getItem('userName') || 'Unknown';
-  const data = {
-    name: userName,
-    event: "new journal entry",
-    version: "B",
-    startTime: new Date(startTimeRef.current).toLocaleString(),
-    endTime: new Date(endTime).toLocaleString(),
-    elapsedTimeSeconds
+  const handleNewEntryClick = () => {
+    navigate("/journalEntry");
   };
-
-  push(ref(database, 'timers/'), data)
-    .then(() => {
-      console.log('Timer data saved to Firebase');
-      navigate("/journalEntry");
-    })
-    .catch(error => {
-      console.error('Error saving data:', error);
-      navigate("/journalEntry"); // Optional: still navigate on error
-    });
-};
-
-  
 
   const formatDate = (dateString) => {
     const [year, month, day] = dateString.split('-').map(Number);
@@ -76,25 +50,20 @@ const handleNewEntryClick = () => {
 
   return (
     <div>
-      <div className="button-wrapper">
-        <button className="back-button-journal" onClick={() => navigate("/suggestions")}>
-          Back to Suggestions
+      <LoadBar percentage={75} />
+      <h1 className="journal-header">My Journal</h1>
+      <div className="back-button-container">
+        <button className="back-button mt-2" onClick={() => navigate("/suggestions")}>
+          <ArrowBigLeft size={30} />
         </button>
       </div>
-      <h1 className="journal-header">My Journal Entries</h1>
-
       <div className="calendar d-flex justify-content-center fade-in-up">
         <JournalCalendar
           setSelectedDate={setSelectedDate}
           selectedDate={selectedDate}
         />
       </div>
-
-      <button className="new-entry-button fade-in-up" onClick={handleNewEntryClick}>
-        Add New Entry +
-      </button>
-
-      <h3 className="previous-entries-title fade-in-up">View Previous Entries</h3>
+      <h3 className="previous-entries-title fade-in-up">Previous Entries</h3>
       <div className="previous-entries d-flex flex-column justify-content-center fade-in-up">
         <h4 className="entry-date">{formatDate(selectedDate)}</h4>
         <div>
@@ -107,6 +76,7 @@ const handleNewEntryClick = () => {
                   index={index}
                   emojiUrl={`${process.env.PUBLIC_URL}/images/${entry.emotion}.svg`}
                   onDelete={handleRemoveEntry}
+                  selectedDate={selectedDate}
                 />
               ))
             ) : (
@@ -115,41 +85,47 @@ const handleNewEntryClick = () => {
           </ul>
         </div>
       </div>
+      <button className="new-entry-button fade-in-up" onClick={handleNewEntryClick}>
+        New Entry
+      </button>
     </div>
   );
 };
 
-// Move these components here to keep clean
-const JournalListItem = ({ entry, index, onDelete, emojiUrl }) => {
+const JournalListItem = ({ entry, index, onDelete, emojiUrl, selectedDate }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-
+  const navigate = useNavigate();
   return (
     <li className="list-group-item">
-      <div style={{ cursor: 'pointer' }} onClick={() => setIsExpanded(!isExpanded)}>
-        <img src={emojiUrl} alt="emotion" style={{ width: '24px', height: '24px', marginRight: '0.5rem' }} />
-        {entry.text}
+      <div
+        style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', gap: '0.5rem' }}
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        <img src={emojiUrl} alt="emotion" style={{ width: '24px', height: '24px' }} />
+        <strong>{entry.title || "No Title"}</strong>
       </div>
 
       {isExpanded && (
-        <div className="mt-2 d-flex gap-2 justify-content-right">
-          <button className="btn btn-sm btn-secondary">Edit</button>
-          <button className="btn btn-sm btn-danger" onClick={() => onDelete(index)}>
-            Delete
-          </button>
+        <div className="mt-2">
+          <p>{entry.text}</p>
+          <div className="d-flex gap-2 justify-content-end">
+            <button
+              className="btn btn-sm btn-secondary"
+              onClick={() => {
+                sessionStorage.setItem('editEntryIndex', index);
+                sessionStorage.setItem('editEntryDate', selectedDate);
+                sessionStorage.setItem('editEntryTitle', entry.title || 'No Title');
+                sessionStorage.setItem('editEntryText', entry.text);
+                navigate("/journalEntry");
+              }}
+            >
+              Edit
+            </button>
+            <button className="btn btn-sm btn-danger" onClick={() => onDelete(index)}>Delete</button>
+          </div>
         </div>
       )}
     </li>
-  );
-};
-
-const BackButton = () => {
-  const navigate = useNavigate();
-  return (
-    <div className="back-button-container">
-      <button className="back-button-journal" onClick={() => navigate("/suggestions")}>
-        Back to Suggestions
-      </button>
-    </div>
   );
 };
 

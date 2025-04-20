@@ -73,34 +73,38 @@ const Yoga = () => {
   };
 
   return (
-    <div className="App" style={{ padding: '20px' }}>
-      <button className="back-button-yoga" onClick={() => navigate("/suggestions")}>
-        Back to Suggestions
-      </button>
-      <h1 style={{ paddingBottom: '10px', paddingTop: '25px' }}>Yoga for Mental Wellness</h1>
+    <div>
+
+      <LoadBar percentage={75} />
+      <h1 className="journal-header">Yoga</h1>
+      <div className="back-button-container">
+        <button className="back-button mt-2" onClick={() => navigate("/suggestions")}>
+          <ArrowBigLeft size={30} />
+        </button>
+      </div>
+
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <VideoBox
-        title="Morning Yoga Flow"
-        videoSrc="https://www.w3schools.com/html/mov_bbb.mp4"
-        audioSrc="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-        refName="video1"
-        videoRefs={videoRefs}
-        videoDescription="Start your day with energy and focus. This gentle morning yoga session awakens your body, boosts circulation, and sets a positive tone for the day ahead."
-      />
-    </div>  
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
-  <VideoBox
-    title="Evening Relaxation Yoga"
-    videoSrc="https://www.w3schools.com/html/movie.mp4"
-    audioSrc="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
-    refName="video2"
-    videoRefs={videoRefs}
-    videoDescription="Wind down and release the stress of the day. This calming evening flow helps relax your muscles and mind, preparing you for a restful night’s sleep."
-  />
-</div>
-</div> 
-    
-    
+        <VideoBox
+          title="Morning Yoga Flow"
+          videoSrc="https://www.w3schools.com/html/mov_bbb.mp4"
+          audioSrc="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+          refName="video1"
+          videoRefs={videoRefs}
+          videoDescription="Start your day with energy and focus. This gentle morning yoga session awakens your body, boosts circulation, and sets a positive tone for the day ahead."
+        />
+      </div>  
+      
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <VideoBox
+          title="Evening Relaxation Yoga"
+          videoSrc="https://www.w3schools.com/html/movie.mp4"
+          audioSrc="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+          refName="video2"
+          videoRefs={videoRefs}
+          videoDescription="Wind down and release the stress of the day. This calming evening flow helps relax your muscles and mind, preparing you for a restful night’s sleep."
+        />
+      </div>
+    </div> 
   );
 };
 
