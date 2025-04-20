@@ -75,6 +75,7 @@ const Breathing = () => {
       </div>
 
       <h1 className="mt-3">Breathing Exercise</h1>
+      <p>Press play to begin</p>
 
       <div style={{ position: 'relative', width: '250px', height: '250px', margin: '40px auto 0 auto' }}>
         <svg width="250" height="250">

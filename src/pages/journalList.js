@@ -76,7 +76,11 @@ const handleNewEntryClick = () => {
 
   return (
     <div>
-      <BackButton />
+      <div className="button-wrapper">
+        <button className="back-button-journal" onClick={() => navigate("/suggestions")}>
+          Back to Suggestions
+        </button>
+      </div>
       <h1 className="journal-header">My Journal Entries</h1>
 
       <div className="calendar d-flex justify-content-center fade-in-up">
