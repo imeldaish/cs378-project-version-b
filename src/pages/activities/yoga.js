@@ -1,4 +1,3 @@
-Yoga.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowBigLeft } from 'lucide-react';
@@ -27,6 +26,7 @@ const VideoBox = ({ title, videoSrc, videoDescription }) => {
             width="640"
             height="360"
             allow="autoplay"
+            allowFullScreen
             style={{
               display: 'block',
               border: 'none',
