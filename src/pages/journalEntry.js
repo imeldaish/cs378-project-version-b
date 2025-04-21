@@ -1,124 +1,149 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { database, ref, push } from '../components/firebase';
-import { ArrowBigLeft } from 'lucide-react';
-import { useRef } from 'react';
-import CompleteButton from '../components/CompleteButton';
 
 const JournalEntry = () => {
+
   const [entries, setEntries] = useState({});
+  const [title, setTitle] = useState('');
   const [input, setInput] = useState('');
+  const [showCancelModal, setShowCancelModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+
   const getLocalDate = () => {
     const today = new Date();
     today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
     return today.toISOString().split('T')[0];
   };
+
   const [selectedDate] = useState(getLocalDate());
   const navigate = useNavigate();
 
-  const addEntryTimeRef = useRef(null);
+  const isEditMode = sessionStorage.getItem('editEntryIndex') !== null;
 
   useEffect(() => {
-    const storedEntries = JSON.parse(localStorage.getItem('journalEntries'));
-    if (storedEntries) {
-      setEntries(storedEntries);
+    const storedEntries = JSON.parse(localStorage.getItem('journalEntries')) || {};
+    setEntries(storedEntries);
+
+    const editTitle = sessionStorage.getItem('editEntryTitle');
+    const editText = sessionStorage.getItem('editEntryText');
+
+    if (editTitle || editText) {
+      setTitle(editTitle || '');
+      setInput(editText || '');
     }
   }, []);
-
-  const updateLocalStorage = (items) => {
-    localStorage.setItem('journalEntries', JSON.stringify(items));
-  };
 
   const handleAddEntry = (e) => {
     e.preventDefault();
     if (input.trim() === '') return;
-  
+
     const emotion = sessionStorage.getItem('emotion') || 'bored';
     const newEntry = {
+      title: title.trim() || 'No Title',
       text: input.trim(),
       emotion: emotion
     };
-  
-    const newEntries = {
-      ...entries,
-      [selectedDate]: [...(entries[selectedDate] || []), newEntry],
-    };
-  
+
+    const newEntries = { ...entries };
+    const editingIndex = sessionStorage.getItem('editEntryIndex');
+    const editingDate = sessionStorage.getItem('editEntryDate');
+
+    setShowSuccessModal(true);
+
+    if (editingIndex !== null && editingDate) {
+      const updatedArray = [...(newEntries[editingDate] || [])];
+      updatedArray[editingIndex] = newEntry;
+      newEntries[editingDate] = updatedArray;
+
+      sessionStorage.removeItem('editEntryIndex');
+      sessionStorage.removeItem('editEntryDate');
+      sessionStorage.removeItem('editEntryTitle');
+      sessionStorage.removeItem('editEntryText');
+    } else {
+      newEntries[selectedDate] = [...(entries[selectedDate] || []), newEntry];
+    }
+
     setEntries(newEntries);
     localStorage.setItem('journalEntries', JSON.stringify(newEntries));
     setInput('');
-    addEntryTimeRef.current = Date.now();
+    setTitle('');
   };
-  
 
-  const goBack = () => {
-    if (addEntryTimeRef.current) {
-      const endTime = Date.now();
-      const elapsedTimeSeconds = Number(((endTime - addEntryTimeRef.current) / 1000).toFixed(4));
-  
-      const userName = sessionStorage.getItem('userName') || 'Unknown';
-      const data = {
-        name: userName,
-        event: "Time from Add Entry to Main Menu",
-        version: "B",
-        startTime: new Date(addEntryTimeRef.current).toLocaleString(),
-        endTime: new Date(endTime).toLocaleString(),
-        elapsedTimeSeconds
-      };
-
-      push(ref(database, 'timers/'), data)
-        .then(() => {
-          console.log('Add-to-Main time saved to Firebase ✅');
-          navigate('/journalList');
-        })
-        .catch(error => {
-          console.error('Error saving time:', error);
-          navigate('/journalList');
-        });
-    } else {
-      // If no Add Entry clicked, just navigate
-      navigate('/journalList');
-    }
+  const handleCancel = () => {
+    sessionStorage.removeItem('editEntryIndex');
+    sessionStorage.removeItem('editEntryDate');
+    sessionStorage.removeItem('editEntryTitle');
+    sessionStorage.removeItem('editEntryText');
+    navigate('/journalList');
   };
-  
+
+  const handleGoBack = () => {
+    navigate('/journalList');
+  };
 
   const handleClear = () => {
     setInput('');
+    setTitle('');
   };
 
   return (
-    <>
     <div className="page" style={{ padding: '1rem' }}>
-      <h2>Journal Entry</h2>
-      <div className="back-button-container">
-        <button className="back-button mt-2 mb-2" onClick={goBack}>
-          <ArrowBigLeft size={30}/>
-        </button>
-      </div>
-      <form onSubmit={handleAddEntry}>
+      <h2>{isEditMode ? 'Edit Entry' : 'New Entry'}</h2>
+      <form onSubmit={handleAddEntry} className="d-flex flex-column justify-content-center">
+        <input
+          type="text"
+          placeholder="Entry Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          style={{ width: '80vm', marginBottom: '0.5rem', borderRadius: '8px' }}
+        />
         <textarea
           placeholder="Write your journal entry..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
           rows={4}
-          style={{ width: '100%', marginBottom: '0.5rem' }}
+          style={{ width: '80vm', marginBottom: '0.5rem', borderRadius: '8px' }}
         />
-        <button type="submit" class="button">Add Entry</button>
-        <button type="button" class="button" onClick={handleClear}>Clear</button>
+
+        <div className="d-flex justify-content-between" style={{ width: '80vm' }}>
+          <div className="p-2">
+            <button type="button" class="button" onClick={handleClear}>Clear</button>
+          </div>
+          <div className="d-flex">
+            <div className="p-2">
+              <button type="button" className="button" onClick={() => setShowCancelModal(true)}>Cancel</button>
+            </div>
+            <div className="p-2">
+              <button type="submit" class="button">{isEditMode ? 'Save' : 'Add'}</button>
+            </div>
+          </div>
+        </div>
       </form>
 
-      <ul style={{ marginTop: '1rem', listStyleType:'none'}}>
-        {(entries[selectedDate] || []).map((entry, index) => (
-          <li key={index} style={{ marginBottom: '1rem' }}>
-            <div>
-              <img src={`${process.env.PUBLIC_URL}/images/${entry.emotion}.svg`} alt="emotion" style={{ width: '24px', height: '24px', marginRight: '0.5rem' }} />
-              {entry.text}
+      {showCancelModal && (
+        <div className="confirmation-modal">
+          <div className="modal-content">
+            <p>{isEditMode ? "Are you sure? Your changes will not be saved." : "Are you sure? Your entry will not be added."}</p>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem', gap: '0.5rem' }}>
+              <button className="button" onClick={handleCancel}>Yes</button>
+              <button className="button" onClick={() => setShowCancelModal(false)}>No</button>
             </div>
-          </li>
-        ))}
-      </ul>
+          </div>
+        </div>
+      )}
+
+      {showSuccessModal && (
+        <div className="confirmation-modal">
+          <div className="modal-content">
+            <p>{isEditMode ? "Successfully edited entry!" : "Successfully added entry!"}</p>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '1rem' }}>
+              <button className="button" onClick={() => { setShowSuccessModal(false); handleGoBack(); }}>Ok</button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
-    </>
   );
 };
 

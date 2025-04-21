@@ -4,7 +4,9 @@
   min-height: 100vh;
   font-family: "Lexend", sans-serif;
 }
-html, body {
+
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -18,24 +20,24 @@ body {
   position: relative;
 }
 
-.page{
+.page {
   min-height: calc(100vh - 110px);
 }
 
-.mood-page{
+.mood-page {
   min-height: calc(100vh - 315px);
 }
 
 /***********************load bar************************************/
-.loadbar-container{
+.loadbar-container {
   background-color: white;
   height: 100px;
   align-items: center;
   justify-content: center;
-  border-radius:0 0 20px 20px;
+  border-radius: 0 0 20px 20px;
 }
 
-.loadbar-empty-bar{
+.loadbar-empty-bar {
   position: relative;
   width: 90%;
   height: 30px;
@@ -46,7 +48,7 @@ body {
   top: 55px;
 }
 
-.loadbar-fill-bar{
+.loadbar-fill-bar {
   width: 0%;
   height: 100%;
   background-color: #49BA29;
@@ -57,30 +59,30 @@ body {
 /***********************Navbar************************************/
 
 .navbar {
+  position: fixed;
   display: flex;
   background-color: white;
-  margin-top: 20px;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
   height: 99px;
   z-index: 1000;
-  position: absolute;
   bottom: 0;
   left: 0;
+  width: 100%;
 }
 
 .navbar ul {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;  
+  justify-content: space-between;
   width: 90%;
   margin-left: 35px;
 }
 
 /***********************Suggestions************************************/
 
-.header-container{
+.header-container {
   background-color: white;
   width: 70vw;
   margin: 20px auto;
@@ -88,10 +90,10 @@ body {
   padding: 10px;
 }
 
-.suggestion-list{
-  list-style-type:none;
-  padding:0px;
-  margin:0px;
+.suggestion-list {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
 }
 
 .suggestion-button {
@@ -99,7 +101,11 @@ body {
   background-color: white;
   margin: 10px;
   font-size: larger;
+  font-weight: 500;
+  font-weight: 500;
   padding: 10px 15px;
+  width: 300px;
+  width: 300px;
   border: solid #CAE8A2 5px;
   transition: border 0.2s ease;
 }
@@ -114,16 +120,17 @@ body {
   border: solid #49BA29 5px;
 }
 
-.next-button{
+.next-button {
   background-color: black;
   color: white;
   padding: 5px 10px;
   font-size: medium;
   border-radius: 50px;
+  margin-bottom: 20px;
 }
 
 /******************Activities***********************/
-.activity-display-box{
+.activity-display-box {
   display: inline-block;
   width: 85vw;
   height: auto;
@@ -134,7 +141,62 @@ body {
   margin-bottom: 20px;
 }
 
-.audio-player{
+.suggestions-text {
+  padding-top: 40px;
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 85vh;
+  text-align: center;
+  margin-left: 80px;
+  margin-right: 80px;
+  margin-left: 80px;
+  margin-right: 80px;
+}
+
+.spinner {
+  padding-top: 40px;
+  width: 50px;
+  height: 50px;
+  border: 6px solid #ffffff;
+  border-top-color: #49BA29;
+  border-radius: 100%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 2s ease-out forwards;
+}
+
+
+.audio-player {
   margin: 0 auto;
 }
 
@@ -154,10 +216,10 @@ body {
   background-color: #3a9e24;
   color: white
 }
+
 .audio-player {
   width: 100%;
   max-width: 350px;
-  padding: 20px;
   border-radius: 15px;
   text-align: center;
   margin-bottom: 20px;
@@ -167,18 +229,44 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 50px;
+  width: 100%;
+  padding-left: 50px;
+  padding-right: 50px;
+  margin-bottom: 10px;
+}
+
+.yoga-video-desc {
+  background-color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  max-width: 600px;
+}
+
+.yoga-video-text {
+  margin-top: 10px;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 .play-button {
-  padding: 10px 20px;
-  background-color: #49ba29;
+  background-color: black;
   color: white;
   border: none;
-  border-radius: 50px;
+  border-radius: 50%;
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s ease;
+  width: 50px;
+  height: 50px;
 }
 
 .play-button:hover {
@@ -189,6 +277,21 @@ body {
   display: flex;
   align-items: left;
   margin-left: 15px;
+}
+
+.back-button-journal {
+  display: flex;
+  justify-content: left;
+  background-color: black;
+  color: white;
+  padding: 5px 10px 5px;
+  font-size: medium;
+  border-radius: 50px;
+}
+
+.button-wrapper {
+  padding-top: 10px;
+  padding-left: 10px;
 }
 
 .progress-bar {
@@ -214,12 +317,11 @@ body {
   -webkit-appearance: none;
   width: 100%;
   height: 10px;
-  background: linear-gradient(
-    to right,
-    #49BA29 var(--value, 0%),
-    white var(--value, 0%)
-  );
-  border-radius: 50px; /* Full circle holder */
+  background: linear-gradient(to right,
+      black var(--value, 0%),
+      white var(--value, 0%));
+  border-radius: 50px;
+  /* Full circle holder */
   outline: none;
   cursor: pointer;
   transition: background 0.3s ease;
@@ -232,12 +334,13 @@ body {
   appearance: none;
   width: 16px;
   height: 16px;
-  background: #49BA29;
+  background: black;
   border-radius: 50%;
   cursor: pointer;
   border: none;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-  margin-top: -3px; /* Align thumb vertically */
+  margin-top: -3px;
+  /* Align thumb vertically */
   position: relative;
   z-index: 2;
 }
@@ -295,30 +398,44 @@ body {
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 }
 
-
-
 /******************Journal List***********************/
 .journal-header {
   font-weight: bold;
-  padding-top: 10px;
+  padding-bottom: 18px;
 }
 
 .calendar {
-  padding: 10px 10px;
+  padding-bottom: 10px;
+}
+
+.react-calendar {
+  border-radius: 10px;
+  border: none;
+  font-family: "Lexend", sans-serif;
 }
 
 .new-entry-button {
   border-radius: 50px;
-  background-color: #49ba29;
+  background-color: black;
   margin: 10px;
   font-size: larger;
+  color: white;
   padding: 10px 15px;
   border: solid #CAE8A2 5px;
   transition: border 0.2s ease;
-  color: white;
 }
 
 .back-button {
+  background-color: black;
+  color: white;
+  padding: 5px 10px;
+  font-size: medium;
+  border-radius: 50px;
+}
+
+.back-button-yoga {
+  display: flex;
+  justify-content: left;
   background-color: black;
   color: white;
   padding: 5px 10px;
@@ -336,19 +453,90 @@ body {
   width: 70vw;
   margin: 0 auto;
   padding: 1rem;
+  margin-bottom: 15px;
+}
+
+form {
+  padding-top: 60px;
+}
+
+textarea {
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.journal-entry-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .entry-date {
   padding: 10px 10px;
 }
 
+.confirmation-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.10);
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 2000;
+}
+
+.modal-content {
+  background-color: white !important;
+  padding: 2rem !important;
+  border-radius: 12px !important;
+  text-align: center !important;
+  max-width: 320px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem !important;
+}
+
+/******************Journal Calendar***********************/
+.react-calendar {
+  font-family: 'Lexend', sans-serif;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid #ffffff;
+}
+
+.react-calendar__month-view__days__day,
+.react-calendar__month-view__days__day--weekend {
+  color: black !important;
+}
+
+.react-calendar__tile {
+  border: 1px solid #d3d3d3;
+  margin: 2px;
+  border-radius: 10px;
+}
+
+.react-calendar__navigation__label {
+  font-weight: bold;
+}
+
+.react-calendar__navigation button {
+  border: none;
+  background: none;
+}
+
+/******************Homepage***********************/
 .home-header {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
   background-color: white;
-  height: 179px;
+  height: 149px;
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
 }
@@ -399,6 +587,17 @@ body {
   font-weight: bold;
 }
 
+.generate-suggestions-button {
+  width: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: white;
+  background-color: black;
+  border-radius: 21.5px;
+  height: 43px;
+  margin-bottom: 20px;
+}
+
 .mood-name-selected {
   display: flex;
   align-items: center;
@@ -411,4 +610,20 @@ body {
   margin-left: 100px;
   margin-right: 100px;
   border-radius: 18px;
+}
+
+video {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+iframe {
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
 }
