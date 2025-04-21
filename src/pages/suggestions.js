@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom'; 
+import { useLocation, useNavigate } from 'react-router-dom';
 import LoadBar from '../components/LoadBar.js';
 import { ArrowBigLeft } from 'lucide-react';
 
@@ -10,7 +10,7 @@ const SuggestionPage = () => {
   const [selectedActivity, setSelectedActivity] = useState(null);
 
 
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const { state } = useLocation();
   // Save emotion to sessionStorage if passed via state
   useEffect(() => {
@@ -55,29 +55,29 @@ const SuggestionPage = () => {
 
   return (
     <>
-    <div className='page'>
-    <LoadBar percentage={50}/>
-      <div className="back-button-container">
-        <button className="back-button mt-2" onClick={() => navigate("/", { state: { emotion } })}>
-          <ArrowBigLeft size={30}/>
-        </button>
-      </div>
-      <div className='header-container'>
-        <h1 className='mt-2 fw-semibold'>You are feeling:</h1>
-        <h1 className='fw-bold' style={{ color: '#49BA29' }}>{emotion.toUpperCase()}</h1>
-      </div>
-      
+      <div className='page'>
+        <LoadBar percentage={50} />
+        <div className="back-button-container">
+          <button className="back-button mt-2" onClick={() => navigate("/", { state: { emotion } })}>
+            <ArrowBigLeft size={30} />
+          </button>
+        </div>
+        <div className='header-container'>
+          <h1 className='mt-2 fw-semibold'>You are feeling:</h1>
+          <h1 className='fw-bold' style={{ color: '#49BA29' }}>{emotion.toUpperCase()}</h1>
+        </div>
 
-      {loading ? (
-        <p>Loading...</p>
-      ) : error ? (
-        <p>{error}</p>
-      ) : (
-        <div>
-          <h3 className="suggestions-text fade-in-up">Here are some suggestions based on your mood</h3>
-          <p className="fade-in-up">Select an activity to continue</p>
-          <ul className='suggestion-list'>
-            {suggestions[emotion] && suggestions[emotion].suggestions.length > 0? (
+
+        {loading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p>{error}</p>
+        ) : (
+          <div>
+            <h3 className="suggestions-text fade-in-up">Here are some suggestions based on your mood</h3>
+            <p className="fade-in-up">Select an activity to continue</p>
+            <ul className='suggestion-list'>
+              {suggestions[emotion] && suggestions[emotion].suggestions.length > 0 ? (
                 suggestions[emotion].suggestions.map((item, index) => (
                   <li className="fade-in-up" key={index}>
                     <button className={`suggestion-button ${selectedActivity?.activity === item.activity ? 'active' : ''}`}
@@ -90,17 +90,17 @@ const SuggestionPage = () => {
                 <p>No suggestions available.</p>
               )}
 
-          </ul>
+            </ul>
 
-          {selectedActivity && (
-            <div>
-              <p>You have selected: {selectedActivity.activity}</p>
-              <button className="next-button" onClick={handleContinue}>CONTINUE</button>
-            </div>
-          )}
-        </div>
-      )}
-    </div>
+            {selectedActivity && (
+              <div>
+                {/* <p>You have selected: {selectedActivity.activity}</p> */}
+                <button className="next-button" onClick={handleContinue}>CONTINUE</button>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </>
   );
 };

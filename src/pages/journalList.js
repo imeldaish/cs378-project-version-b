@@ -51,12 +51,12 @@ const JournalList = () => {
   return (
     <div>
       <LoadBar percentage={75} />
-      <h1 className="journal-header">My Journal</h1>
       <div className="back-button-container">
         <button className="back-button mt-2" onClick={() => navigate("/suggestions")}>
           <ArrowBigLeft size={30} />
         </button>
       </div>
+      <h1 className="journal-header">My Journal</h1>
       <div className="calendar d-flex justify-content-center fade-in-up">
         <JournalCalendar
           setSelectedDate={setSelectedDate}
