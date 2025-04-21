@@ -1,11 +1,11 @@
-import React, { useState, useRef } from 'react';
+Yoga.js
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowBigLeft } from 'lucide-react';
 import LoadBar from '../../components/LoadBar.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const VideoBox = ({ title, videoSrc, refName, videoRefs, videoDescription }) => {
-
+const VideoBox = ({ title, videoSrc, videoDescription }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleDescription = () => {
@@ -21,18 +21,18 @@ const VideoBox = ({ title, videoSrc, refName, videoRefs, videoDescription }) => 
     <div className="video-section">
       <div className="yoga-video-box">
         <div className="video-wrapper">
-          <video
-            ref={videoRefs[refName]}
+          <iframe
             src={videoSrc}
+            title={title}
+            width="640"
+            height="360"
+            allow="autoplay"
             style={{
               display: 'block',
-              maxWidth: '640px',
-              height: 'auto',
+              border: 'none',
               borderTopLeftRadius: '20px',
               borderTopRightRadius: '20px',
             }}
-            playsInline
-            controls
           />
         </div>
       </div>
@@ -65,14 +65,6 @@ const VideoBox = ({ title, videoSrc, refName, videoRefs, videoDescription }) => 
 const Yoga = () => {
   const navigate = useNavigate();
 
-  const videoRefs = {
-    video1: useRef(null),
-    video2: useRef(null),
-    video3: useRef(null),
-    video4: useRef(null),
-    video5: useRef(null),
-  };
-
   return (
     <div>
       <LoadBar percentage={75} />
@@ -87,9 +79,7 @@ const Yoga = () => {
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <VideoBox
             title="Morning Yoga Flow (15 min)"
-            videoSrc={`${process.env.PUBLIC_URL}/media/yoga-videos/morning-yoga.mp4`}
-            refName="video1"
-            videoRefs={videoRefs}
+            videoSrc="https://drive.google.com/file/d/1DKFMZT-Vip6TdHOOG_EAhmCtRuw_tVDH/preview"
             videoDescription="Start your day with energy and focus. This gentle morning yoga session awakens your body, boosts circulation, and sets a positive tone for the day ahead."
           />
         </div>
@@ -97,9 +87,7 @@ const Yoga = () => {
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <VideoBox
             title="Evening Tension Relief Yoga (10 min)"
-            videoSrc={`${process.env.PUBLIC_URL}/media/yoga-videos/evening-yoga.mp4`}
-            refName="video2"
-            videoRefs={videoRefs}
+            videoSrc="https://drive.google.com/file/d/1j-KiW25mOM39BBZ07bG7Y_m7pWMlHDew/preview"
             videoDescription="Practice designed for anyone feeling stress, anxiety or tension in the mind or body. Prepare yourself for a good night or use it at any time of the day to take moment and work on your imbalance."
           />
         </div>
@@ -107,9 +95,7 @@ const Yoga = () => {
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <VideoBox
             title="Stress Relief Yoga (15 min)"
-            videoSrc={`${process.env.PUBLIC_URL}/media/yoga-videos/stress-relief-yoga.mp4`}
-            refName="video3"
-            videoRefs={videoRefs}
+            videoSrc="https://drive.google.com/file/d/1YVGlXC3b28i8H6vuKjDPMrWvGn2r3YOk/preview"
             videoDescription="Wind down and release the stress of the day. This calming evening flow helps relax your muscles and mind, preparing you for a restful night’s sleep."
           />
         </div>
@@ -117,9 +103,7 @@ const Yoga = () => {
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <VideoBox
             title="Slow Stretch Yoga (20 min)"
-            videoSrc={`${process.env.PUBLIC_URL}/media/yoga-videos/slow-yoga.mp4`}
-            refName="video4"
-            videoRefs={videoRefs}
+            videoSrc="https://drive.google.com/file/d/1CISYFTmi4VYijbKQge8g3nLSLytOTekY/preview"
             videoDescription="A 20 minute Slow Yoga stretch session with slow stretches to release tension and find deep relaxation."
           />
         </div>
@@ -127,13 +111,10 @@ const Yoga = () => {
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <VideoBox
             title="Quick Simple Yoga (5 min)"
-            videoSrc={`${process.env.PUBLIC_URL}/media/yoga-videos/simple-yoga.mp4`}
-            refName="video5"
-            videoRefs={videoRefs}
+            videoSrc="https://drive.google.com/file/d/1rQuvgkXDjdwD2PSwpfrM7vFznUdvV-G6/preview"
             videoDescription="Stretch out and feel good in only 5 minutes with this easy yoga stretch. Just press play and get on the floor, no mat or experience needed!"
           />
         </div>
-
       </div>
     </div>
   );

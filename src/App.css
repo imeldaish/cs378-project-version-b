@@ -619,3 +619,11 @@ video {
   aspect-ratio: 16 / 9;
   object-fit: cover;
 }
+
+iframe {
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
