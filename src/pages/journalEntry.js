@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const JournalEntry = () => {
@@ -18,7 +18,7 @@ const JournalEntry = () => {
   const [selectedDate] = useState(getLocalDate());
   const navigate = useNavigate();
 
-  const isEditMode = sessionStorage.getItem('editEntryIndex') !== null;
+  const isEditingRef = useRef(false);
 
   useEffect(() => {
     const storedEntries = JSON.parse(localStorage.getItem('journalEntries')) || {};
@@ -26,6 +26,9 @@ const JournalEntry = () => {
 
     const editTitle = sessionStorage.getItem('editEntryTitle');
     const editText = sessionStorage.getItem('editEntryText');
+
+    const isEditing = sessionStorage.getItem('editEntryIndex') !== null;
+    isEditingRef.current = isEditing;
 
     if (editTitle || editText) {
       setTitle(editTitle || '');
@@ -88,33 +91,34 @@ const JournalEntry = () => {
 
   return (
     <div className="page" style={{ padding: '1rem' }}>
-      <h2>{isEditMode ? 'Edit Entry' : 'New Entry'}</h2>
-      <form onSubmit={handleAddEntry} className="d-flex flex-column justify-content-center">
+      <h2 className="journal-header">{isEditingRef.current ? 'Edit Entry' : 'New Entry'}</h2>
+      <form onSubmit={handleAddEntry} className="d-flex flex-column justify-content-center" style={{ paddingTop: '0px', paddingBottom: '0px' }}>
         <input
           type="text"
           placeholder="Entry Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          style={{ width: '80vm', marginBottom: '0.5rem', borderRadius: '8px' }}
+          style={{ paddingLeft: '10px', width: '80vm', marginBottom: '20px', borderRadius: '13px', height: '45px', border: 'none', fontSize: '24px', fontWeight: '600' }}
         />
         <textarea
           placeholder="Write your journal entry..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
           rows={4}
-          style={{ width: '80vm', marginBottom: '0.5rem', borderRadius: '8px' }}
+          style={{ width: '80vm', marginBottom: '40px', borderRadius: '8px', height: '336px', borderRadius: '16px', border: 'none' }}
         />
 
-        <div className="d-flex justify-content-between" style={{ width: '80vm' }}>
-          <div className="p-2">
-            <button type="button" class="button" onClick={handleClear}>Clear</button>
+        <div className="d-flex justify-content-between" style={{ width: '100%' }}>
+          <div style={{ flex: '1', maxWidth: '115px' }}>
+            <button type="button" className="cancel-button" onClick={handleClear}>Clear</button>
           </div>
-          <div className="d-flex">
-            <div className="p-2">
-              <button type="button" className="button" onClick={() => setShowCancelModal(true)}>Cancel</button>
+
+          <div className="d-flex gap-2" style={{ flexShrink: 0 }}>
+            <div style={{ maxWidth: '135px' }}>
+              <button type="button" className="entry-button" onClick={() => setShowCancelModal(true)}>Cancel</button>
             </div>
-            <div className="p-2">
-              <button type="submit" class="button">{isEditMode ? 'Save' : 'Add'}</button>
+            <div style={{ maxWidth: '135px' }}>
+              <button type="submit" className="entry-button">{isEditingRef.current ? 'Save' : 'Add'}</button>
             </div>
           </div>
         </div>
@@ -123,7 +127,7 @@ const JournalEntry = () => {
       {showCancelModal && (
         <div className="confirmation-modal">
           <div className="modal-content">
-            <p>{isEditMode ? "Are you sure? Your changes will not be saved." : "Are you sure? Your entry will not be added."}</p>
+            <p>{isEditingRef.current ? "Are you sure? Your changes will not be saved." : "Are you sure? Your entry will not be added."}</p>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem', gap: '0.5rem' }}>
               <button className="button" onClick={handleCancel}>Yes</button>
               <button className="button" onClick={() => setShowCancelModal(false)}>No</button>
@@ -135,7 +139,7 @@ const JournalEntry = () => {
       {showSuccessModal && (
         <div className="confirmation-modal">
           <div className="modal-content">
-            <p>{isEditMode ? "Successfully edited entry!" : "Successfully added entry!"}</p>
+            <p>{isEditingRef.current ? "Successfully edited entry!" : "Successfully added entry!"}</p>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '1rem' }}>
               <button className="button" onClick={() => { setShowSuccessModal(false); handleGoBack(); }}>Ok</button>
             </div>

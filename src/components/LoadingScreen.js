@@ -25,10 +25,22 @@ const LoadingScreen = () => {
   }, []);
 
   return (
-    <div className="loading-screen">
+    <div className="loading-screen"
+    style={{
+      backgroundImage: `url(${process.env.PUBLIC_URL}/images/wave.jpg)`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      position: 'relative',
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      textAlign: 'center',
+    }}>
       <div className="spinner"></div>
-      <h2>{loadingMessages[index]}</h2>
-      <p>Just a sec while we match your mood with mindful moments.</p>
+      <h2 className="loading-text">{loadingMessages[index]}</h2>
+      <p className="loading-text">Just a sec while we match your mood with mindful moments.</p>
     </div>
   );
 };

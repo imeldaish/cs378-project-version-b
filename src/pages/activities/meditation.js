@@ -50,7 +50,7 @@ const Meditation = () => {
     <>
     <LoadBar percentage={70}/>
     <div className='page'>
-      <h1>Meditation Tracks</h1>
+      <h1 style={{paddingTop: '30px'}}>Meditation Tracks</h1>
       <p>First, pick a track to meditate to:</p>
 
       {currentTrack && (
@@ -63,7 +63,7 @@ const Meditation = () => {
         </div>
       )}
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px', width: '85vw', margin: '0 auto' }}>
+      <div style={{ paddingBottom: '15px', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px', width: '85vw', margin: '0 auto' }}>
         {playlist.map((track, index) => (
           <button
             key={index}
@@ -87,7 +87,7 @@ const Meditation = () => {
         </div>
       )}
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px', width: '85vw', margin: '0 auto' }}>
+      <div style={{ paddingBottom: '15px', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px', width: '85vw', margin: '0 auto' }}>
         {walkthroughs.map((walkthrough, index) => (
           <button
             key={index}

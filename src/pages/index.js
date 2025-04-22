@@ -73,14 +73,14 @@ const MoodPage = () => {
     <>
     <div className="home-header">
         <div className="header-text">
-          <h1 className="header-title">Hi, {name.charAt(0).toUpperCase() + name.slice(1)}!</h1>
+          <h1 className="header-title" onClick={() => navigate("/onboarding")}>Hi, {name.charAt(0).toUpperCase() + name.slice(1)}!</h1>
           <h3>How do you <span className="feel-text">feel</span> today?</h3>
         </div>
       </div>
     <div className='mood-page'>
       
 
-      <div className="selected-emotion">
+      <div className="selected-emotion fade-in-up">
         <div className="emoji">
           <img
             src={emotions[selectedEmotion]?.emoji.replace('.svg', '_select.svg')}
@@ -88,12 +88,12 @@ const MoodPage = () => {
             className="emoji-img-selected"
           />
         </div>
-        <p className="mood-name-selected">
+        <p className="mood-name-selected fade-in-up">
           {selectedEmotion.toUpperCase()}
         </p>
       </div>
 
-      <div className="emoji-grid">
+      <div className="emoji-grid fade-in-up">
         {Object.entries(emotions).map(([mood, data]) => (
           <div
             key={mood}
@@ -115,7 +115,7 @@ const MoodPage = () => {
         ))}
       </div>
 
-      <button className="generate-suggestions-button" onClick={handleNextClick}>GENERATE SUGGESTIONS</button>
+      <button className="generate-suggestions-button fade-in-up" onClick={handleNextClick}>GENERATE SUGGESTIONS</button>
     </div>
     </>
   );

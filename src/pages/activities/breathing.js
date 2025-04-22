@@ -67,7 +67,8 @@ const Breathing = () => {
   }, []);
 
   return (
-    <div className="App breathing-page" style={{ padding: '20px', minHeight: '100vh', backgroundColor: '#CAE8A2' }}>
+    <div className="App breathing-page" style={{ color: '#ffffff', minHeight: '100vh', backgroundImage: `url(${process.env.PUBLIC_URL}/images/breathe.jpg)`, backgroundSize: 'cover',
+    backgroundPosition: 'center', }}>
       <div className="back-button-container">
         <button className="back-button mt-2" onClick={() => navigate("/suggestions")}>
           <ArrowBigLeft size={30} />
@@ -84,7 +85,7 @@ const Breathing = () => {
             cx="125"
             cy="125"
             r="100"
-            stroke="#ffffff"
+            stroke="#CAE8A2"
             strokeWidth="15"
             fill="none"
             strokeDasharray={2 * Math.PI * 100}
@@ -101,7 +102,7 @@ const Breathing = () => {
           transform: 'translate(-50%, -50%)',
           fontSize: '28px',
           fontWeight: '600',
-          color: '#ffffff'
+          color: '#CAE8A2'
         }}>
           {isInhale ? 'inhale' : 'exhale'}
         </div>
